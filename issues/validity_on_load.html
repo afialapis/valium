@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JS Validation API - validate inline values</title>
+    <style>
+      div {
+        margin-top: 1em;
+      }
+      label {
+        padding: 1em;
+      }
+      input[name='aminl'],
+      input[name='amaxl'],
+      input[name='aemail'],
+      input[name='arequi'],
+      input[name='apat'] {
+        width: 200px;
+      }
+      input[name='anumber'],
+      input[name='adecim'] {
+        width: 50px;
+      }
+      input:valid {
+        border-color: blue;
+      }
+      input:invalid {
+        border-color: orange;
+      }  
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <p>On load, input validity constraints are checked except for minlength/maxlength.</p>
+      <p>The two actions below try to set is as invalid programatically, with no success.</p>
+      <p>Just user interactions on the first two inputs will set them as invalid.</p>
+    </div>
+    <form>
+      <div>
+        <label>Short</label>
+        <input name="aminl"  minlength="100" value="Text shorter than 100 chars" autocomplete="off"></input>
+      </div>
+      <div>
+        <label>Long</label>
+        <input name="amaxl"  maxlength="10" value="Text longer than 10 chars" autocomplete="off"></input>
+      </div>
+      <div>
+        <label>Email</label>
+        <input name="aemail"  type="email" value="invalid@" autocomplete="off"></input>
+      </div>
+      <div>
+        <label>Required</label>
+        <input name="arequi"  required value="" autocomplete="off"></input>
+      </div>   
+      <div>
+        <label>Pattern</label>
+        <input name="apat"  pattern="[a-z]" value="INVALID12345" autocomplete="off"></input>
+      </div>      
+      <div>
+        <label>Num</label>
+        <input type="number" name="anumber" max="10" value="25" autocomplete="off"></input>
+      </div>
+      <div>
+        <label>Dec</label>
+        <input type="number" name="adecim" step="1" value="5.5" autocomplete="off"></input>
+      </div>      
+    </form>
+    <div>
+      <button onclick="dispatchEvents()" autofocus>dispatch events</button>        
+    </div>
+    <div>
+      <button onclick="changeValues()">change values</button>        
+    </div>
+    <script>
+      function dispatchEvents() {
+        document.querySelector('input[name=aminl]').dispatchEvent(new Event('change', { 'bubbles': true }))
+        document.querySelector('input[name=amaxl]').dispatchEvent(new Event('change', { 'bubbles': true }))
+        document.querySelector('input[name=aemail]').dispatchEvent(new Event('change', { 'bubbles': true }))
+        document.querySelector('input[name=arequi]').dispatchEvent(new Event('change', { 'bubbles': true }))
+        document.querySelector('input[name=apat]').dispatchEvent(new Event('change', { 'bubbles': true }))
+        document.querySelector('input[name=anumber]').dispatchEvent(new Event('change', { 'bubbles': true }))
+        document.querySelector('input[name=adecim]').dispatchEvent(new Event('change', { 'bubbles': true }))
+      }
+      function changeValues() {
+        document.querySelector('input[name=aminl]').value= "Still invalid text"
+        document.querySelector('input[name=amaxl]').value= "Still invalid text"
+        document.querySelector('input[name=aemail]').value= "Still_invalid@"
+        document.querySelector('input[name=arequi]').value= ""
+        document.querySelector('input[name=apat]').value= "STILL INVALID"
+        document.querySelector('input[name=anumber]').value= 35
+        document.querySelector('input[name=adecim]').value= 6.6
+      }
+    </script>
+  </body>
+
+</html>
