@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
+
 const TerserPlugin = require('terser-webpack-plugin')
 
 const env = process.env.NODE_ENV === 'production' ? 'production' : 'development'
@@ -23,6 +24,7 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: filename,
   },
+  target: 'node',
   plugins: plugins,
   module: {
     rules: [
