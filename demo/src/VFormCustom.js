@@ -131,7 +131,9 @@ const VFormCustom = () => {
                                           type         = "date"
                                           name         = "adate"
                                           defaultValue = {adate}
-                                          style        = {{borderColor: `${valid ? 'blue' : 'red'}`}}>
+                                          style        = {{borderColor: `${valid ? 'blue' : 'red'}`}}
+                                          onChange     = {(ev) => console.log(ev.target.value)}
+                                          >
                                   </input>
                                   {valid!==true
                                     ? <span style={{color: "grey"}}>{message}</span>

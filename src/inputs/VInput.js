@@ -104,6 +104,9 @@ class VInput extends React.Component {
     this.inputRef.addEventListener(this.eventToListenTo, (event) => {
       this.handleChange(event)
     })
+    if (this.props.bindSetValidity!=undefined) {
+      this.props.bindSetValidity(this.setValidity.bind(this))
+    }    
   }
 
   removeChangeListener() {
