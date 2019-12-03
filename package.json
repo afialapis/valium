@@ -34,7 +34,8 @@
   "keywords": [
     "js",
     "react",
-    "form"
+    "form",
+    "validation"
   ],
   "devDependencies": {
     "@babel/cli": "^7.6.0",

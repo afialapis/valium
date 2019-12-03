@@ -6,6 +6,11 @@ module.exports = {
   "plugins": [
 	"react"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module",
