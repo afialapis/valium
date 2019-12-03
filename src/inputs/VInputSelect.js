@@ -1,8 +1,6 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-import VInput from './VInput'
+import VInputBase from './VInputBase'
 
-class VInputSelect extends VInput {  
+class VInputSelect extends VInputBase {  
 
   addChangeListener() {
     this.inputRef.addEventListener(this.eventToListenTo, (event) => {
@@ -23,19 +21,7 @@ class VInputSelect extends VInput {
   parseForCompare(value) {
     return value.toString()
   }  
-
-  render() {
-    //console.log('VInputSelect RENDER - ' + this.state.valid)
-    return this.props.render(
-       this.state,
-       this.innerRef)
-  }
 }
 
-/*
-VInputSelect.propTypes = {
-  ...VInput.propTypes
-}
-*/
 
 export default VInputSelect

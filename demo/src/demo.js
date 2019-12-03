@@ -7,14 +7,14 @@ import './demo.scss'
 
 const Demo = () => {
   return (
-    <div>
+    <>
       <h1>
-        Custom VForm
+        Valium Demo
       </h1>
-      <section>
+      <div className="valium-example">
         <VFormCustom/>
-      </section>
-    </div>
+      </div>    
+    </>
   );
 }
 

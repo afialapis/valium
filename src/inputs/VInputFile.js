@@ -1,8 +1,6 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-import VInput from './VInput'
+import VInputBase from './VInputBase'
 
-class VInputFile extends VInput {  
+class VInputFile extends VInputBase {  
   _dbg_assertType= 'file'
 
   get inputValue() {
@@ -23,19 +21,7 @@ class VInputFile extends VInput {
 
   }
 
-
-  render() {
-    //console.log('VInputFile RENDER - ' + this.state.valid)
-    return this.props.render(
-       this.state,
-       this.innerRef)
-  }
 }
 
-/*
-VInputFile.propTypes = {
-  ...VInput.propTypes
-}
-*/
 
 export default VInputFile

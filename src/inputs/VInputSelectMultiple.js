@@ -1,8 +1,6 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-import VInput from './VInput'
+import VInputBase from './VInputBase'
 
-class VInputSelectMultiple extends VInput {  
+class VInputSelectMultiple extends VInputBase {  
 
   get options() {
     return Array.prototype.slice.call(this.inputRef.options)
@@ -14,7 +12,7 @@ class VInputSelectMultiple extends VInput {
              .filter((opt) => opt.selected)
              .map((opt) => opt.value)
     } catch(e) {
-      console.error(e)
+      console.error('Valium Form : VInputSelectMultiple error ' + e.message.toString())
     }
     return []
   }
@@ -42,18 +40,8 @@ class VInputSelectMultiple extends VInput {
     return ''
   }  
 
-  render() {
-    //console.log('VInputSelectMultiple RENDER - ' + this.state.valid)
-    return this.props.render(
-       this.state,
-       this.innerRef)
-  }
 }
 
-/*
-VInputSelectMultiple.propTypes = {
-  ...VInput.propTypes
-}
-*/
+
 
 export default VInputSelectMultiple

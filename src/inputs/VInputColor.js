@@ -1,6 +1,4 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-import VInput from './VInput'
+import VInputBase from './VInputBase'
 
 function colorStrToTuple(s, min, max) {
   let parts= s.toString().split('(')
@@ -54,7 +52,7 @@ function rgbToHex(r, g, b) {
 
 function colorToHex(s) {
   if (typeof s != 'string') {
-    console.error(`SFORM : Unknown color type ${typeof s} ${s}`)
+    console.error(`Valium Form : Unknown color type ${typeof s} ${s}`)
     return undefined
   }
 
@@ -76,26 +74,18 @@ function colorToHex(s) {
     return rgbToHex(...rgb)
   }
 
-  console.error(`SFORM : Unable to parse color type ${typeof s} ${s}`)
+  console.error(`Valium Form : Unable to parse color type ${typeof s} ${s}`)
   return undefined  
 }
 
 
-class VInputColor extends VInput { 
+class VInputColor extends VInputBase { 
 
   _dbg_assertType= 'color'
   
   constructor(props) {
     super(props)
   }
-  
-  /*
-  get inputValue() {
-    // NOTE: Translate to something?
-    // NOTE: it only affects to validation
-    return super.inputValue
-  }
-  */
 
   parseForCompare(value) {
     if (value===undefined || value==='') {
@@ -103,21 +93,7 @@ class VInputColor extends VInput {
     }
     return colorToHex(value)
   }
-
-  render() {
-    //console.log('VInputColor RENDER - ' + this.state.valid)
-    return this.props.render(
-       this.state,
-       this.innerRef)
-  }  
 }
 
-/*
-VInputColor.propTypes = {
-  ...VInput.propTypes,
-  allowedValues    : PropTypes.arrayOf(PropTypes.number),
-  disallowedValues : PropTypes.arrayOf(PropTypes.number)
-}
-*/
 
 export default VInputColor

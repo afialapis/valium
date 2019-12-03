@@ -1,8 +1,6 @@
-// import React from 'react'
-// import PropTypes from 'prop-types'
-import VInput from './VInput'
+import VInputBase from './VInputBase'
 
-class VInputNumber extends VInput { 
+class VInputNumber extends VInputBase { 
 
   _dbg_assertType= 'number'
   
@@ -16,21 +14,6 @@ class VInputNumber extends VInput {
     }
     return parseFloat(value)
   }
-
-  render() {
-    //console.log('VInputNumber RENDER - ' + this.state.valid)
-    return this.props.render(
-       this.state,
-       this.innerRef)
-  }  
 }
-
-/*
-VInputNumber.propTypes = {
-  ...VInput.propTypes,
-  allowedValues    : PropTypes.arrayOf(PropTypes.number),
-  disallowedValues : PropTypes.arrayOf(PropTypes.number)
-}
-*/
 
 export default VInputNumber

@@ -15,7 +15,6 @@ class VForm extends React.Component {
   }
   
   isValid() {
-    // console.log('FORM REF:')
     if (this.formRef && this.formRef.current) {
       const formElements= Array.prototype.slice
         .call(this.formRef.current.elements)
@@ -42,8 +41,7 @@ class VForm extends React.Component {
           }
         }
       })
-      
-      // console.log('FORM isValid? '+!someInvalid)
+
       return {valid: !someInvalid, elements: elements}
     } else {
       return {valid: false, elements: {}}
@@ -51,14 +49,12 @@ class VForm extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('FORM MOUNTED')
     this.setState(
       this.isValid()
     )
   }
   
   render() {
-    // console.log('FORM RENDER')
     return (
       <div>
         <form ref        = {this.formRef}
@@ -77,11 +73,10 @@ class VForm extends React.Component {
 
 
 VForm.propTypes = {
+  renderButtons: PropTypes.func.isRequired,
+  children     : PropTypes.arrayOf(PropTypes.object).isRequired,
   className    : PropTypes.string,
-  children     : PropTypes.arrayOf(PropTypes.object),
-  renderButtons: PropTypes.func,
   disabled     : PropTypes.bool
-  
 }
 
 export default VForm
