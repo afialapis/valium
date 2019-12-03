@@ -53,20 +53,26 @@ class VForm extends React.Component {
       this.isValid()
     )
   }
+
+  handleChange() {
+    this.setState(this.isValid())
+    if (this.props.onChange!=undefined) {
+      this.props.onChange(this.state.valid, this.state.elements)
+    }
+  }
   
   render() {
     return (
-      <div>
-        <form ref        = {this.formRef}
-              className  = {`${this.props.className!=undefined ? this.props.className : ''} valium-form`}
-              onChange   = {() => this.setState(this.isValid())}
-              //noValidate = {true}
-              onSubmit   = {(e) => e.preventDefault()}>
-          {this.props.children}
+      <form id         = {this.props.id}
+            ref        = {this.formRef}
+            className  = {`${this.props.className!=undefined ? this.props.className : ''} valium-form`}
+            onChange   = {() => this.setState(this.isValid())}
+            //noValidate = {true}
+            onSubmit   = {(e) => e.preventDefault()}>
+        {this.props.children}
 
-          {this.props.renderButtons(this.state)}    
-        </form>  
-      </div>    
+        {this.props.renderButtons(this.state.valid, this.state.elements)}    
+      </form>  
     )
   }
 }
@@ -74,9 +80,11 @@ class VForm extends React.Component {
 
 VForm.propTypes = {
   renderButtons: PropTypes.func.isRequired,
-  children     : PropTypes.arrayOf(PropTypes.object).isRequired,
+  children     : PropTypes.oneOfType([PropTypes.object.isRequired, PropTypes.arrayOf(PropTypes.object).isRequired]),
+  id           : PropTypes.string,
   className    : PropTypes.string,
-  disabled     : PropTypes.bool
+  disabled     : PropTypes.bool,
+  onChange     : PropTypes.func
 }
 
 export default VForm

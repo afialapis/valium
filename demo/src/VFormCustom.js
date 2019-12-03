@@ -8,7 +8,7 @@ const VFormCustom = () => {
   const [anum  , _setAnum  ] = useState('some controlled component')
   const [acheck, _setAcheck] = useState('some controlled component')
   const [acolor, _setAcolor] = useState('#123456')
-  const [adate , _setAdate ] = useState('some controlled component')
+  const [adate , _setAdate ] = useState('2020-01-01')
 
   const onCancel = (valid, _elements) => {
     console.log('Cancelling...')
@@ -21,7 +21,7 @@ const VFormCustom = () => {
     console.log(valid)
   }
 
-  const renderButtons = ({valid, elements}) => {
+  const renderButtons = (valid, elements) => {
     return (
       <div className="valium-example-buttons">
         <button onClick={(_ev) => onCancel(valid, elements)}>Cancel</button>
@@ -150,7 +150,9 @@ const VFormCustom = () => {
                                type         = "date"
                                name         = "adate"
                                defaultValue = {adate}
-                               className    = {valid ? 'valid' : 'invalid'}>
+                               className    = {valid ? 'valid' : 'invalid'}
+                               onChange     = {(ev) => console.log(ev.target.value)}
+                               >
                         </input>
                         <div className="valium-example-input-feedback">
                           {message}

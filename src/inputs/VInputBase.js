@@ -11,7 +11,10 @@ const DEFAULT_FEEDBACK= {
   tooLong         : 'Value is longer than expected',
   typeMismatch    : 'Value type is wrong',
   valueMissing    : 'Value is required',
-  valid           : 'Value is not valid'
+  valid           : 'Value is not valid',
+  // custom validations
+  customAllowList    : 'Value is not allowed',
+  customDisallowList : 'Value is disallowed'
 }
 
 const countDecimals = (f) => {
@@ -210,7 +213,7 @@ class VInputBase extends React.Component {
         .map((v) => this.parseForCompare(v))
         .indexOf(this.parseForCompare(value)) >= 0
       if (! exists) {
-        return this.validityMessage('customError')
+        return this.validityMessage('customAllowList')
       }
     }
     
@@ -220,7 +223,7 @@ class VInputBase extends React.Component {
         .map((v) => this.parseForCompare(v))
         .indexOf(this.parseForCompare(value)) >= 0
       if (exists) {
-        return this.validityMessage('customError')
+        return this.validityMessage('customDisallowList')
       }
     }
 
