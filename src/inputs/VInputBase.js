@@ -208,7 +208,7 @@ class VInputBase extends React.Component {
     }
 
     // Allowed values list
-    if (this.props.allowedValues != undefined && value) {
+    if (this.props.allowedValues != undefined && value!=undefined) {
       const exists= this.props.allowedValues
         .map((v) => this.parseForCompare(v))
         .indexOf(this.parseForCompare(value)) >= 0
@@ -218,7 +218,7 @@ class VInputBase extends React.Component {
     }
     
     // Disallowed values list
-    if (this.props.disallowedValues != undefined && value) {
+    if (this.props.disallowedValues != undefined && value!=undefined) {
       const exists= this.props.disallowedValues
         .map((v) => this.parseForCompare(v))
         .indexOf(this.parseForCompare(value)) >= 0
