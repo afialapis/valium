@@ -34,6 +34,7 @@ const debugIt = (f) => {
 class VInputBase extends React.Component {  
 
   _dbg_assertType= undefined
+  _keyup_event = true
 
   constructor(props) {
     super(props)  
@@ -118,7 +119,7 @@ class VInputBase extends React.Component {
 
       this.setValidity()
 
-      this.addChangeListener(this.props.checkValidityOnKeyup ? 'keyup' : 'change')
+      this.addChangeListener(this.props.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
 
       debugIt(() => {
         if (this._dbg_assertType!=undefined) {
@@ -133,13 +134,13 @@ class VInputBase extends React.Component {
   }
 
   componentWillUnmount() {
-    this.removeChangeListener(this.props.checkValidityOnKeyup ? 'keyup' : 'change')
+    this.removeChangeListener(this.props.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
   }
 
   componentDidUpdate(prevProps, _prevState, _snapshot) {
     if (prevProps.checkValidityOnKeyup != this.props.checkValidityOnKeyup) {
-      this.removeChangeListener(prevProps.checkValidityOnKeyup ? 'keyup' : 'change')
-      this.addChangeListener(this.props.checkValidityOnKeyup ? 'keyup' : 'change')
+      this.removeChangeListener(prevProps.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
+      this.addChangeListener(this.props.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
     }
   }
 

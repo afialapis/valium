@@ -1,6 +1,7 @@
 import VInputBase from './VInputBase'
 
 class VInputSelect extends VInputBase {  
+  _keyup_event = false
 
   addChangeListener(eventType) {
     this.inputRef.addEventListener(eventType, (event) => {

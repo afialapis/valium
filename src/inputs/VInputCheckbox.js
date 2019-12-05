@@ -3,6 +3,7 @@ import VInputBase from './VInputBase'
 class VInputCheckbox extends VInputBase { 
 
   _dbg_assertType= 'checkbox'
+  _keyup_event = false
   
   get inputChecked() {
     return this._inputProp('checked')
