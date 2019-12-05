@@ -88,33 +88,28 @@ class VInputBase extends React.Component {
     return this._inputProp('step')
   }  
 
-
-  get eventToListenTo() {
-    try {
-      if (this.props.checkValidityOnKeyup) {
-        return 'keyup'
-      }
-    } catch(e) {}
-    return 'change'
-  }
-
   rightAfterMount() {
 
   }
 
-  addChangeListener() {
-    this.inputRef.addEventListener(this.eventToListenTo, (event) => {
+  addChangeListener(eventType) {
+    this.changeListener= (event) => {
       this.handleChange(event)
-    })
+    }
+
+    this.inputRef.addEventListener(eventType, this.changeListener)
     if (this.props.bindSetValidity!=undefined) {
       this.props.bindSetValidity(this.setValidity.bind(this))
     }    
   }
 
-  removeChangeListener() {
+  removeChangeListener(eventType) {
     if (this.inputRef!=undefined) {
-      this.inputRef.removeEventListener(this.eventToListenTo)
-    }    
+      this.inputRef.removeEventListener(eventType, this.changeListener)
+    }
+    if (this.props.bindSetValidity!=undefined) {
+      this.props.bindSetValidity(() => {})
+    }
   }
 
   componentDidMount() {
@@ -123,7 +118,7 @@ class VInputBase extends React.Component {
 
       this.setValidity()
 
-      this.addChangeListener()
+      this.addChangeListener(this.props.checkValidityOnKeyup ? 'keyup' : 'change')
 
       debugIt(() => {
         if (this._dbg_assertType!=undefined) {
@@ -138,7 +133,14 @@ class VInputBase extends React.Component {
   }
 
   componentWillUnmount() {
-    this.removeChangeListener()
+    this.removeChangeListener(this.props.checkValidityOnKeyup ? 'keyup' : 'change')
+  }
+
+  componentDidUpdate(prevProps, _prevState, _snapshot) {
+    if (prevProps.checkValidityOnKeyup != this.props.checkValidityOnKeyup) {
+      this.removeChangeListener(prevProps.checkValidityOnKeyup ? 'keyup' : 'change')
+      this.addChangeListener(this.props.checkValidityOnKeyup ? 'keyup' : 'change')
+    }
   }
 
   validityMessage(errorName) {

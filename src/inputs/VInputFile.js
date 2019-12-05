@@ -13,11 +13,11 @@ class VInputFile extends VInputBase {
   }
 
 
-  addChangeListener() {
+  addChangeListener(eventType) {
 
   }
 
-  removeChangeListener() {
+  removeChangeListener(eventType) {
 
   }
 

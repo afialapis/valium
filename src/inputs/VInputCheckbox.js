@@ -11,10 +11,6 @@ class VInputCheckbox extends VInputBase {
     return this.inputChecked
   }
 
-  get eventToListenTo() {
-    return 'click'
-  }
-
   rightAfterMount() {
     if (this.inputRef.value==='true' || this.inputRef.value===true) {
       this.inputRef.setAttribute('checked', true)

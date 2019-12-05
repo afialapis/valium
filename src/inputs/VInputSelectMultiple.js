@@ -17,22 +17,6 @@ class VInputSelectMultiple extends VInputBase {
     return []
   }
 
-  /*
-  addChangeListener() {
-    this.options.map((opt) => {
-      opt.addEventListener('click', (event) => {
-        this.handleChange(event)
-      })
-    })
-  }
-
-  removeChangeListener() {
-    this.options.map((opt) => {
-      opt.removeEventListener('click')
-    })
-  }
-  */
-
   parseForCompare(value) {
     try {
       return value.sort().join(',')
