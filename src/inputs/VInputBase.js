@@ -119,7 +119,7 @@ class VInputBase extends React.Component {
 
       this.setValidity()
 
-      this.addChangeListener(this.props.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
+      this.addChangeListener(this.props.checkValidityOnKeyUp && this._keyup_event ? 'keyup' : 'change')
 
       debugIt(() => {
         if (this._dbg_assertType!=undefined) {
@@ -134,13 +134,13 @@ class VInputBase extends React.Component {
   }
 
   componentWillUnmount() {
-    this.removeChangeListener(this.props.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
+    this.removeChangeListener(this.props.checkValidityOnKeyUp && this._keyup_event ? 'keyup' : 'change')
   }
 
   componentDidUpdate(prevProps, _prevState, _snapshot) {
-    if (prevProps.checkValidityOnKeyup != this.props.checkValidityOnKeyup) {
-      this.removeChangeListener(prevProps.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
-      this.addChangeListener(this.props.checkValidityOnKeyup && this._keyup_event ? 'keyup' : 'change')
+    if (prevProps.checkValidityOnKeyUp != this.props.checkValidityOnKeyUp) {
+      this.removeChangeListener(prevProps.checkValidityOnKeyUp && this._keyup_event ? 'keyup' : 'change')
+      this.addChangeListener(this.props.checkValidityOnKeyUp && this._keyup_event ? 'keyup' : 'change')
     }
   }
 
@@ -277,7 +277,7 @@ VInputBase.propTypes = {
   checkValue          : PropTypes.Promise || PropTypes.func,
   allowedValues       : PropTypes.arrayOf(PropTypes.any),
   disallowedValues    : PropTypes.arrayOf(PropTypes.any),
-  checkValidityOnKeyup: PropTypes.bool
+  checkValidityOnKeyUp: PropTypes.bool
 }
 
 

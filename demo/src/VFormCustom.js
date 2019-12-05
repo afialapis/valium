@@ -36,7 +36,7 @@ const VFormCustom = () => {
       <VInput
           type                 = "text"
           disallowedValues     = {["NO"]}
-          checkValidityOnKeyup = {true}
+          checkValidityOnKeyUp = {true}
           render =  {({valid, message}, inputRef) => 
                       <div className="valium-example-input-group">
                         <label>
