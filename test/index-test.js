@@ -31,8 +31,8 @@ describe('Valium', function() {
       return (
         <div>
           <VForm id           = {id} 
-                 renderButtons= {() => <div/>}>
-            <div/>
+                 renderButtons= {() => <div/>}
+                 renderInputs={(_fUpd) => <div/>}>
           </VForm>
         </div>
       )
@@ -60,8 +60,8 @@ describe('Valium', function() {
 
       return (
         <div>
-          <VForm renderButtons= {(params) => renderButtons(params)}>
-            <div/>
+          <VForm renderButtons= {(params) => renderButtons(params)}
+                 renderInputs={(_fUpd) => <div/>}>
           </VForm>
         </div>
       )
