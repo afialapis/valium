@@ -156,13 +156,13 @@ class VInputBase extends React.Component {
     if (this.inputRef==undefined) {
       return ''
     }
-    
-    const value = this.inputValue
 
     // NOTE Manage 'disable' prop? sure?
     if (this.inputDisabled===true) {
       return ''
     }
+
+    const value = this.inputValue
 
     const vs= this.inputRef.validity
     if (vs!=undefined) {
@@ -181,7 +181,6 @@ class VInputBase extends React.Component {
     // When loading document, minlength/maxlength/step constraints are not checked
     // Check this pen: https://codepen.io/afialapis/pen/NWKJoPJ?editors=1111
     // and /issues/validity_on_load
-
     if (this.inputMaxLength && this.inputMaxLength>0 && value.length>this.inputMaxLength) {
       return this.validityMessage('tooLong')
     }
@@ -237,6 +236,7 @@ class VInputBase extends React.Component {
     // Clear previous custom error
     if (this.inputRef!=undefined) {
       this.inputRef.setCustomValidity('')
+      this.inputRef.setAttribute('data-valium-validity', '')  
     }
 
     // Check error if any
@@ -254,6 +254,11 @@ class VInputBase extends React.Component {
       valid: (validity===true || validity===''),
       message: validity
     })
+
+    // Update form
+    if (this.props.formUpdate!=undefined) {
+      this.props.formUpdate(this.inputRef, validity, this.inputValue)
+    }
   }
 
   handleChange(_event) {
@@ -277,7 +282,8 @@ VInputBase.propTypes = {
   checkValue          : PropTypes.Promise || PropTypes.func,
   allowedValues       : PropTypes.arrayOf(PropTypes.any),
   disallowedValues    : PropTypes.arrayOf(PropTypes.any),
-  checkValidityOnKeyUp: PropTypes.bool
+  checkValidityOnKeyUp: PropTypes.bool,
+  formUpdate          : PropTypes.func
 }
 
 
