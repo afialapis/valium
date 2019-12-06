@@ -1,5 +1,4 @@
 h1{
-  margin-top: 1em;
   text-align: center;
 }
 
@@ -13,14 +12,26 @@ h1{
   margin-top: 1em;
 }
 
-.valium-example input, select {
+.valium-example .valium-example-input-group label {
+  color: #555050;
+}
+
+.valium-example input, 
+.valium-example select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
+  box-sizing: border-box;
+}
+
+.valium-example input {
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
+}
+
+.valium-example input:focus {
+  border-color: rgb(101, 114, 233);
 }
 
 .valium-example input.invalid,
@@ -30,6 +41,7 @@ h1{
 .valium-example .valium-example-input-feedback {
   color: red;
   font-style: italic;
+  font-size: 0.8em;
 }
 
 .valium-example input.valid > .valium-example-input-feedback,

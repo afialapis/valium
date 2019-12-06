@@ -1,25 +1,6 @@
 
-ON INPUT NUMBER => 
-  -- localization for decimal character?
-
-OTHER HTML DEFAULT ATTRIBUTES ?
-   -- as we have [name], required, min, max, step...  
-
-   -- manage <disabled>? no, no? leave it for render()
-
-   -- pattern => put in 
-
-   WHY DONT GET INVALID O LOADING A LONG VALUE?
-
-InputList / InputDate
-
-  -- cuando cambian, no se actualiza en la validacion del Form
-     solo actualiza cuando se vacia el campo
-
-InputDate
-  -- usar input type="date" normal??
-
 InputNumber
+   -- localization for decimal character?
    -- ver bien el tema de step y redondeos
       si step=0.01, no deja meter mas decimales... ver como pasar parametro generico a step
       ==> MASK?

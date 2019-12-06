@@ -3,6 +3,7 @@ import VInputBase from './VInputBase'
 class VInputDate extends VInputBase { 
 
   //_dbg_assertType= 'date'
+  _force_listen_event= 'change'
   
   parseForCompare(value) {
     if (value==='' || value === undefined) {

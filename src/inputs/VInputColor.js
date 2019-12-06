@@ -82,7 +82,7 @@ function colorToHex(s) {
 class VInputColor extends VInputBase { 
 
   _dbg_assertType= 'color'
-  _keyup_event = false
+  _force_listen_event= 'change'
   
   constructor(props) {
     super(props)

@@ -1,7 +1,7 @@
 import VInputBase from './VInputBase'
 
 class VInputSelectMultiple extends VInputBase {  
-  _keyup_event = false
+  _force_listen_event= 'click'
   
   get options() {
     return Array.prototype.slice.call(this.inputRef.options)

@@ -6,15 +6,8 @@ import VFormCustom from './VFormCustom'
 import './demo.scss'
 
 const Demo = () => {
-  return (
-    <>
-      <h1>
-        Valium Demo
-      </h1>
-      <div className="valium-example">
-        <VFormCustom/>
-      </div>    
-    </>
+  return (  
+    <VFormCustom/>
   );
 }
 

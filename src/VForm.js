@@ -35,7 +35,7 @@ class VForm extends React.Component {
 
   // 
   // It's called after first handleUpdate() calls, so state.elements is already filled
-  // SHould this handleUpdate() calls be made?
+  // SHould this handleUpdate() calls be made before mounting?
   // componentDidMount() {   
   //   this.setState({
   //     elements: this.getElements()
