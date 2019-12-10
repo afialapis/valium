@@ -170,7 +170,7 @@ VInputBase.propTypes = {
   doRepeat            : PropTypes.string,
   doNotRepeat         : PropTypes.string,
   prematureValidation : PropTypes.bool,
-  formUpdate          : PropTypes.func
+  formActions         : PropTypes.object
 }
 
 
