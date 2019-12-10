@@ -1,15 +1,25 @@
 import VInputBase from './VInputBase'
 
-class VInputNumber extends VInputBase { 
+const VInputNumber = (props) => { 
 
-  _dbg_assertType= 'number'
-  
-  parseForCompare(value) {
-    if (value===undefined || value==='' || isNaN(value)) {
-      return undefined
+  const nconfig= {
+    ...props.config,
+    dbg_assertType : 'number',
+    
+    parseForCompare: (value) => {
+      if (value===undefined || value==='' || isNaN(value)) {
+        return undefined
+      }
+      return parseFloat(value)
     }
-    return parseFloat(value)
   }
+
+  const nprops= {
+    ...props,
+    config: nconfig
+  }
+
+  return VInputBase(nprops)
 }
 
 export default VInputNumber

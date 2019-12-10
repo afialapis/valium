@@ -1,27 +1,21 @@
 import VInputBase from './VInputBase'
 
-class VInputSelect extends VInputBase {  
-  _force_listen_event= 'click'
-  
-  /*
-  addChangeListener(eventType) {
-    this.changeListener= (event) => {
-      // This timeout kinda fixes problems with <select>, which
-      // gets updated due to the setState and does not propagate the 
-      // new value on the onChange.
-      // TODO Investigate me
-      setTimeout(() => {      
-        this.handleChange(event)
-      }, 10)
-    }    
-    this.inputRef.addEventListener(eventType, this.changeListener)
+const VInputSelect = (props) => { 
+
+  const nconfig= {
+    ...props.config,
+    premature_check: false,
+    change_event   : 'click',
+    
+    parseForCompare: (value) => value.toString()
   }
-  */
 
-  parseForCompare(value) {
-    return value.toString()
-  }  
+  const nprops= {
+    ...props,
+    config: nconfig
+  }
+
+  return VInputBase(nprops)
 }
-
 
 export default VInputSelect

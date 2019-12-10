@@ -1,12 +1,35 @@
-h1{
-  text-align: center;
+body {
+  background-color: #f2f2f2;
 }
 
 .valium-example {
   border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
+  padding: 1em;
 }
+
+.valium-example .centered {
+  text-align: center;
+}
+
+.valium-example .mgbottom {
+  margin-bottom: 2em;
+}
+
+
+
+.valium-example .row {
+  display: flex;
+}
+
+.valium-example .column {
+  flex: 50%;
+  margin: 0 2em;
+  background-color: #ece8e8;
+  padding: 1em;
+}
+
+
+
 
 .valium-example .valium-example-input-group {
   margin-top: 1em;
@@ -16,8 +39,9 @@ h1{
   color: #555050;
 }
 
-.valium-example input, 
-.valium-example select {
+.valium-example .valium-example-input-group input, 
+.valium-example .valium-example-input-group textarea, 
+.valium-example .valium-example-input-group select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -25,17 +49,20 @@ h1{
   box-sizing: border-box;
 }
 
-.valium-example input {
+.valium-example .valium-example-input-group input,
+.valium-example .valium-example-input-group textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.valium-example input:focus {
+.valium-example .valium-example-input-group input:focus,
+.valium-example .valium-example-input-group textarea:focus {
   border-color: rgb(101, 114, 233);
 }
 
-.valium-example input.invalid,
-.valium-example select.invalid {
+.valium-example .valium-example-input-group input.invalid,
+.valium-example .valium-example-input-group textarea.invalid,
+.valium-example .valium-example-input-group select.invalid {
   border-color: red;
 }
 .valium-example .valium-example-input-feedback {
@@ -44,8 +71,9 @@ h1{
   font-size: 0.8em;
 }
 
-.valium-example input.valid > .valium-example-input-feedback,
-.valium-example select.valid > .valium-example-input-feedback {
+.valium-example .valium-example-input-group input.valid > .valium-example-input-feedback,
+.valium-example .valium-example-input-group textarea.valid > .valium-example-input-feedback,
+.valium-example .valium-example-input-group select.valid > .valium-example-input-feedback {
   display: none;
 }
 

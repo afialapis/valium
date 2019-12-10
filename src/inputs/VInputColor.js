@@ -52,7 +52,7 @@ function rgbToHex(r, g, b) {
 
 function colorToHex(s) {
   if (typeof s != 'string') {
-    console.error(`Valium Form : Unknown color type ${typeof s} ${s}`)
+    console.error(`Valium: Unknown color type ${typeof s} ${s}`)
     return undefined
   }
 
@@ -74,26 +74,32 @@ function colorToHex(s) {
     return rgbToHex(...rgb)
   }
 
-  console.error(`Valium Form : Unable to parse color type ${typeof s} ${s}`)
+  console.error(`Valium: Unable to parse color type ${typeof s} ${s}`)
   return undefined  
 }
 
 
-class VInputColor extends VInputBase { 
+const VInputColor = (props) => { 
 
-  _dbg_assertType= 'color'
-  _force_listen_event= 'change'
-  
-  constructor(props) {
-    super(props)
-  }
-
-  parseForCompare(value) {
-    if (value===undefined || value==='') {
-      return undefined
+  const nconfig= {
+    ...props.config,
+    dbg_assertType : 'color',
+    premature_event: 'input',
+    
+    parseForCompare: (value) => {
+      if (value===undefined || value==='') {
+        return undefined
+      }
+      return colorToHex(value)
     }
-    return colorToHex(value)
   }
+
+  const nprops= {
+    ...props,
+    config: nconfig
+  }
+
+  return VInputBase(nprops)
 }
 
 

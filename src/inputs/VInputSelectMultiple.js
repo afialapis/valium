@@ -1,32 +1,33 @@
 import VInputBase from './VInputBase'
 
-class VInputSelectMultiple extends VInputBase {  
-  _force_listen_event= 'click'
-  
-  get options() {
-    return Array.prototype.slice.call(this.inputRef.options)
+const VInputSelectMultiple = (props) => { 
+
+  const nconfig= {
+    ...props.config,
+    premature_check: false,
+    change_event   : 'click',
+
+    getValue       : (inputRef) => {
+      const options= Array.prototype.slice.call(inputRef.current.options)
+      return options 
+            .filter((opt) => opt.selected)
+            .map((opt) => opt.value)
+    },
+    
+    parseForCompare: (value) => {
+      try {
+        return value.sort().join(',')
+      } catch(e) {}
+      return ''
+    }  
   }
 
-  get inputValue() {
-    try {
-      return this.options 
-             .filter((opt) => opt.selected)
-             .map((opt) => opt.value)
-    } catch(e) {
-      console.error('Valium Form : VInputSelectMultiple error ' + e.message.toString())
-    }
-    return []
+  const nprops= {
+    ...props,
+    config: nconfig
   }
 
-  parseForCompare(value) {
-    try {
-      return value.sort().join(',')
-    } catch(e) {}
-    return ''
-  }  
-
+  return VInputBase(nprops)
 }
-
-
 
 export default VInputSelectMultiple

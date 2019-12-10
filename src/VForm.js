@@ -1,53 +1,18 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 import PropTypes from 'prop-types'
 
-class VForm extends React.Component {
+const VForm = (props) => {
 
-  constructor(props) {
-    super(props)
-    this.formRef = React.createRef()
+  const formRef = useRef(undefined)
+  const [valid, setValid]= useState(true)
+  const [elements, setElements]= useState({})
     
-    this.state= {
-      valid: true,
-      elements: {
-      }
-    }
-  }
-  
-  getElements() {
-    if (this.formRef && this.formRef.current) {
-      const formElements= Array.prototype.slice
-        .call(this.formRef.current.elements)
-        .filter((elem) => ['INPUT', 'TEXTAREA', 'CHECKBOX', 'SELECT'].indexOf(elem.tagName)>=0)
 
-      let elements= {}
-
-      formElements.map((elem, eidx) => {
-        const elemN= elem.name || `element_${eidx}`
-        elements[elemN]= {valid: true, message: '', value: undefined}
-      })
-
-      return elements
-    } else {
-      return {}
-    }
-  }
-
-  // 
-  // It's called after first handleUpdate() calls, so state.elements is already filled
-  // SHould this handleUpdate() calls be made before mounting?
-  // componentDidMount() {   
-  //   this.setState({
-  //     elements: this.getElements()
-  //   })
-  // }  
-
-  handleUpdate(elem, validity, value) {
-    let elements= this.state.elements
+  const handleUpdate= (elem, validity, value) => {
     elements[elem.name]= {
-       valid  : validity=='' || validity=='true',
-       message: validity, 
-       value  : value
+        valid  : validity=='' || validity=='true',
+        message: validity, 
+        value  : value
     }
 
     let someInvalid= false
@@ -57,25 +22,22 @@ class VForm extends React.Component {
       }
     })
 
-    this.setState({
-      valid: !someInvalid,
-      elements: elements 
-    })
+    setElements(elements)
+    setValid(!someInvalid)
   }
   
-  render() {
-    return (
-      <form id         = {this.props.id}
-            ref        = {this.formRef}
-            className  = {`${this.props.className!=undefined ? this.props.className : ''} valium-form`}
-            noValidate
-            onSubmit   = {(e) => e.preventDefault()}>
-
-        {this.props.renderInputs((elem, validity, value) => this.handleUpdate(elem, validity, value))}
-        {this.props.renderButtons(this.state.valid, this.state.elements)}
-      </form>  
+  return (
+    <form id         = {props.id}
+          ref        = {formRef}
+          className  = {`${props.className!=undefined ? props.className : ''} valium-form`}
+          noValidate
+          onSubmit   = {(e) => {props.onSubmit ? props.onSubmit() : e.preventDefault()}}>
+      {props.renderInputs({
+        formUpdate: (elem, validity, value) => handleUpdate(elem, validity, value)
+      })}
+      {props.renderButtons(valid, elements)}
+    </form>  
     )
-  }
 }
 
 
@@ -84,6 +46,7 @@ VForm.propTypes = {
   renderButtons: PropTypes.func.isRequired,
   id           : PropTypes.string,
   className    : PropTypes.string,
+  onSubmit     : PropTypes.func
 }
 
 export default VForm

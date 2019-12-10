@@ -39,13 +39,13 @@ const VInput = ({type, ...props}) => {
 
 
 VInput.propTypes = {
-  //this.props.config : PropTypes.object,
+  //config            : PropTypes.object,
   feedback            : PropTypes.string,
   render              : PropTypes.func.isRequired,
   checkValue          : PropTypes.Promise || PropTypes.func,
   allowedValues       : PropTypes.arrayOf(PropTypes.any),
   disallowedValues    : PropTypes.arrayOf(PropTypes.any),
-  checkValidityOnKeyUp: PropTypes.bool
+  prematureValidation: PropTypes.bool
 }
 
 
