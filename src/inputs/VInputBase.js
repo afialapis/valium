@@ -19,14 +19,23 @@ const VInputBase = (props) => {
     //
     premature_event  : 'keyup,paste', // 'input',
     //
-    getValue         : (inputRef) => (inputRef!=undefined && inputRef.current!=undefined) ? inputRef.current.value : undefined,
+    getValue         : (inputRef) => {
+      if(inputRef!=undefined && inputRef.current!=undefined) {
+        if (inputRef.current.value==undefined) {
+          return ''
+        }
+        return inputRef.current.value
+      } else {
+        return undefined
+      }
+    },
     rightAfterMount  : (inputRef) => {},
     parseForCompare  : (v) => v.toString(),
     //
-    ...config
+    ...props.config
   }
 
-  const [valid, setValid]= useState(false)
+  const [valid, setValid]= useState(true)
   const [message, setMessage]= useState('')
   
   const inputRef = useRef(undefined)
@@ -170,7 +179,7 @@ VInputBase.propTypes = {
   doRepeat            : PropTypes.string,
   doNotRepeat         : PropTypes.string,
   prematureValidation : PropTypes.bool,
-  formActions         : PropTypes.object
+  formActions         : PropTypes.object.isRequired
 }
 
 

@@ -9,9 +9,10 @@ const VInputSelectMultiple = (props) => {
 
     getValue       : (inputRef) => {
       const options= Array.prototype.slice.call(inputRef.current.options)
-      return options 
-            .filter((opt) => opt.selected)
-            .map((opt) => opt.value)
+      const value = options 
+                    .filter((opt) => opt.selected)
+                    .map((opt) => opt.value)
+      return value
     },
     
     parseForCompare: (value) => {

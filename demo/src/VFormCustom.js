@@ -39,7 +39,7 @@ const VFormCustom = () => {
   const [aCheck , _setACheck] = useState(false)
   const [aColor , _setAColor] = useState('#FF00FF')
   const [aDate  , _setaDate ] = useState(getToday(1))
-  const [aList  , _setAList ] = useState('1')
+  const [aList  , setAList ] = useState('1')
   const [aListm , setAListm ] = useState(['1','4'])
   
   const onCancel = (valid, elements) => {
@@ -238,7 +238,8 @@ const VFormCustom = () => {
                                   </label>
                                   <select ref          = {inputRef}
                                           name         = "aList"
-                                          defaultValue = {aList}
+                                          value        = {aList}
+                                          onChange     = {(ev) => setAList(ev.target.value)}
                                           className    = {valid ? 'valid' : 'invalid'}>
                                     {Object.keys(LIST_OPTIONS).map((o) => 
                                       <option key={`single-select-option-${o}`}
@@ -256,6 +257,7 @@ const VFormCustom = () => {
                 <VInput
                     type                 = "select-multiple"
                     formActions          = {formActions}
+                    allowedValues = {[[], ['1']]}
                     render = {({valid, message}, inputRef) => 
                                 <div className="valium-example-input-group">
                                   <label>

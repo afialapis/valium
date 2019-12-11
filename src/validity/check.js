@@ -9,7 +9,6 @@ const countDecimals = (f) => {
 }
 
 const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat) => {
-
   const input= inputRef.current
   if (input==undefined) {
     return ''
@@ -76,7 +75,7 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
       return defaultMessages['customAllowList']
     }
   }
-  
+
   // Disallowed values list
   if (disallowedValues != undefined && value!=undefined) {
     const exists= disallowedValues
