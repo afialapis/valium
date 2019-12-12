@@ -42,7 +42,7 @@ const VForm = (props) => {
 
 
 VForm.propTypes = {
-  renderInputs : PropTypes.func.isRequired,
+  renderInputs : PropTypes.oneOfType([PropTypes.func, PropTypes.element]).isRequired,
   renderButtons: PropTypes.func.isRequired,
   id           : PropTypes.string,
   className    : PropTypes.string,
