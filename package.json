@@ -1,7 +1,7 @@
 {
   "name": "valium",
-  "version": "0.0.16",
-  "description": "A Form validator for React using browser's validation Api",
+  "version": "0.0.17",
+  "description": "A Form validator for React, using and customizing HTML5 Constraint Validation API",
   "author": "Donato Lorenzo <donato@afialapis.com>",
   "contributors": [
     "Donato Lorenzo <donato@afialapis.com>"
@@ -16,7 +16,8 @@
   },
   "homepage": "https://valium.afialapis.com/",
   "files": [
-    "lib"
+    "lib",
+    "dist"
   ],
   "main": "lib/index.js",
   "scripts": {
