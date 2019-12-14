@@ -23,6 +23,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: filename,
+    library: 'Valium'
   },
   target: 'node',
   plugins: plugins,
