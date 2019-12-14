@@ -1,6 +1,6 @@
 {
   "name": "valium",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A Form validator for React, using and customizing HTML5 Constraint Validation API",
   "author": "Donato Lorenzo <donato@afialapis.com>",
   "contributors": [
@@ -68,8 +68,6 @@
     "mocha": "^6.2.0",
     "node-sass": "^4.12.0",
     "node-uuid": "^1.4.8",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
     "rimraf": "^3.0.0",
     "sass-loader": "^8.0.0",
     "terser-webpack-plugin": "^2.0.1",
@@ -77,5 +75,8 @@
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.11.0"
+  }
 }
