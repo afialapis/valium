@@ -4,7 +4,8 @@ module.exports = {
   "parser": "babel-eslint",
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "plugins": [
-	"react"
+    "react",
+    "react-hooks"
   ],
   "settings": {
     "react": {
@@ -66,7 +67,9 @@ module.exports = {
 	"react/jsx-closing-bracket-location": 0,
 	"react/prop-types": 0,
 	"react/prefer-stateless-function": 0,
-	"no-empty": 0
+  "no-empty": 0,
+  "react-hooks/rules-of-hooks": "error",
+  "react-hooks/exhaustive-deps": "warn"
   }
 }
 

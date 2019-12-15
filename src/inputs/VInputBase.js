@@ -1,11 +1,11 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef, useCallback} from 'react'
 import PropTypes from 'prop-types'
 
 import checkValidity from '../validity/check'
 
-const VInputBase = (props) => {  
+const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, prematureValidation,  feedback, formActions, bindSetValidity, render}) => {  
 
-  const config= {
+  const iconfig= {
     dbg_assertType   : undefined,
     change_event     : 'change' ,
     premature_check  : true     ,
@@ -32,7 +32,7 @@ const VInputBase = (props) => {
     rightAfterMount  : (inputRef) => {},
     parseForCompare  : (v) => v.toString(),
     //
-    ...props.config
+    ...config
   }
 
   const [valid, setValid]= useState(true)
@@ -41,39 +41,38 @@ const VInputBase = (props) => {
   const inputRef = useRef(undefined)
   
 
-  const setValidity= () => {
-    if (inputRef!=undefined && inputRef.current!=undefined) {
-      // Clear previous custom error
-      inputRef.current.setCustomValidity('')
-      inputRef.current.setAttribute('data-valium-validity', '')  
+  const setValidity= useCallback(
+    () => {
+      if (inputRef!=undefined && inputRef.current!=undefined) {
+        // Clear previous custom error
+        inputRef.current.setCustomValidity('')
+        inputRef.current.setAttribute('data-valium-validity', '')  
 
-      // Check error if any
-      const value = config.getValue(inputRef)
-      const validity= checkValidity(inputRef, value, config.parseForCompare, 
-                                  props.checkValue, props.allowedValues, props.disallowedValues, props.doRepeat, props.doNotRepeat)
-      const message= validity==''
-                     ? ''
-                     : props.feedback || validity
+        // Check error if any
+        const value = iconfig.getValue(inputRef)
+        const validity= checkValidity(inputRef, value, iconfig.parseForCompare, 
+                                    checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat)
+        const message= validity==''
+                      ? ''
+                      : feedback || validity
 
-      // Set it
-      //inputRef.current.removeAttribute('readonly')
-      inputRef.current.setCustomValidity(message)
-      inputRef.current.setAttribute('data-valium-validity', message) 
+        // Set it
+        //inputRef.current.removeAttribute('readonly')
+        inputRef.current.setCustomValidity(message)
+        inputRef.current.setAttribute('data-valium-validity', message) 
 
-      // Update state
-      setValid(message==='')
-      setMessage(message)
+        // Update state
+        setValid(message==='')
+        setMessage(message)
 
-      // Update form
-      if (props.formActions && props.formActions.formUpdate!=undefined) {
-        props.formActions.formUpdate(inputRef.current, message, value)
-      }      
-    }
-  }
-
-  const handleChange = (_event) => {
-    setValidity()
-  }
+        // Update form
+        if (formActions && formActions.formUpdate!=undefined) {
+          formActions.formUpdate(inputRef.current, message, value)
+        }      
+      }
+    }, 
+    [iconfig, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, feedback, formActions]
+  )
 
 
   useEffect(() => {
@@ -83,7 +82,7 @@ const VInputBase = (props) => {
       
       // Custom actions
       try {
-        config.rightAfterMount(inputRef)
+        iconfig.rightAfterMount(inputRef)
       } catch(e) {
         if (process.env.NODE_ENV !== "production") {
           console.error(`Valium: error on Input Element (${name}) when calling rightAfterMount(): ${e.message})`)
@@ -94,45 +93,49 @@ const VInputBase = (props) => {
       setValidity()
 
       // Special props
-      if (props.bindSetValidity!=undefined) {
-        props.bindSetValidity(() => setValidity())
+      if (bindSetValidity!=undefined) {
+        bindSetValidity(() => setValidity())
       }
 
       const cleanBindSetValidity = () => {
-        if (props.bindSetValidity!=undefined) {
-          props.bindSetValidity(() => {})
+        if (bindSetValidity!=undefined) {
+          bindSetValidity(() => {})
         }           
       }
 
       // Check props consistency
       if (process.env.NODE_ENV !== "production") {
         // Check input type
-        if (config.dbg_assertType!=undefined) {
+        if (iconfig.dbg_assertType!=undefined) {
           const inputType= inputRef.current.type
-          if (inputType.toString().toUpperCase()!=config.dbg_assertType.toString().toUpperCase()) {
-            console.error(`Valium: an Input Element (${name}) has an incorrect Type (${inputType} instead of ${config.dbg_assertType})`)
+          if (inputType.toString().toUpperCase()!=iconfig.dbg_assertType.toString().toUpperCase()) {
+            console.error(`Valium: an Input Element (${name}) has an incorrect Type (${inputType} instead of ${iconfig.dbg_assertType})`)
           }
         }
         // Check prematureValidation
-        if (props.prematureValidation && !config.premature_check) {
+        if (prematureValidation && !iconfig.premature_check) {
           console.warn(`Valium: You passed prematureValidation=true to the Input Element (${name}), but it does not support it`)
         }
         // Check doRepeat
-        if (props.doRepeat!=undefined && props.doRepeat==name) {
+        if (doRepeat!=undefined && doRepeat==name) {
           console.warn(`Valium: You passed doRepeat prop to the Input Element (${name}) with the same name`)
         }
         // Check doNotRepeat
-        if (props.doNotRepeat!=undefined && props.doNotRepeat==name) {
+        if (doNotRepeat!=undefined && doNotRepeat==name) {
           console.warn(`Valium: You passed doNotRepeat prop to the Input Element (${name}) with the same name`)
         }            
+      }
+
+      const handleChange = (_event) => {
+        setValidity()
       }
 
       // Handle listeners
       const allListeners= {}
 
       // Add premature listeners, if any
-      if (config.premature_check && props.prematureValidation) {
-        const prematureEvents= config.premature_event.split(',')
+      if (iconfig.premature_check && prematureValidation) {
+        const prematureEvents= iconfig.premature_event.split(',')
         prematureEvents.map((eventType) => {
           const prematureListener= (event) => {
             handleChange(event)      
@@ -145,8 +148,8 @@ const VInputBase = (props) => {
       const changeListener= (event) => {
         handleChange(event)
       }
-      inputRef.current.addEventListener(config.change_event, changeListener)
-      allListeners[config.change_event]= changeListener
+      inputRef.current.addEventListener(iconfig.change_event, changeListener)
+      allListeners[iconfig.change_event]= changeListener
 
       // clean listeners function
       const removeAllChangeListeners = () => {
@@ -162,11 +165,9 @@ const VInputBase = (props) => {
       }
       return clean
     }
-  }, [props.config, props.prematureValidation])
+  }, [iconfig, prematureValidation, bindSetValidity, doRepeat, doNotRepeat, setValidity])
   
-  return props.render(
-      {valid, message},
-      inputRef)
+  return render({valid, message}, inputRef)
 }
 
 

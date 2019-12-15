@@ -10,6 +10,7 @@ const plugins = [
   //new BundleAnalyzerPlugin({reportFileName: 'webpack_report.html'})
 ]
 
+
 const filename = env === 'production'
   ? 'valium.min.js'
   : 'valium.js'
@@ -23,9 +24,11 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: filename,
-    library: 'Valium'
+    library: 'Valium',
+    libraryTarget: "umd"
   },
-  target: 'node',
+  target: 'web',
+  //target: 'node',
   plugins: plugins,
   module: {
     rules: [
@@ -51,7 +54,7 @@ module.exports = {
       }
     ]
   },
-  optimization: {
+  optimization: {   
     minimizer: [  new TerserPlugin({
       parallel: true,
       terserOptions: {
