@@ -1,7 +1,0 @@
-InputNumber
-   -- localization for decimal character?
-   -- ver bien el tema de step y redondeos
-      si step=0.01, no deja meter mas decimales... ver como pasar parametro generico a step
-      ==> MASK?
-
-
