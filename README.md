@@ -29,13 +29,15 @@ Valium is here to make your Forms much nicer: with `prematureValidation`, the Va
   npm i valium
 ```
 
-## Intro and example
+## Getting started 
 
 Valium provides just two elements: `VForm` and `VInput`.
 
 `VForm` will be the parent element. It just renders a `form` element, and provide a couple of render props (`renderInputs` and `renderButtons`) so you can render the rest.
 
 Then, any input inside the Form that you want to be validated, must be wrapped within a `VInput` element.
+
+### Basic example
 
 Let's check a basic example [check it at CodePen](https://codepen.io/afialapis/pen/KKwgNWK):
 
@@ -44,61 +46,47 @@ Let's check a basic example [check it at CodePen](https://codepen.io/afialapis/p
 import React, {useState} from 'react';
 import {VForm, VInput} from 'valium'
 
-
 const MyValidatedForm = () => {
 
-  const [myText, setMyText]= useState('')
-
-  const onSubmit = (elements) => {
-    //
-    // elements
-    //
-  }
-
+  const [myText, setMyText]= React.useState('')
+  
   return (
-    <>
-      <div>
-        Valium Basic Example
-      </div>
-      <div>
-        <VForm renderButtons= {(valid, elements) => 
-                <button disabled={! valid}
-                        onClick={(ev) => onSubmit(elements)}>
-                  {"Save"}
-                </button>
-                }
+      <VForm 
+        renderButtons= {(valid, elements) => null}
 
-              renderInputs= {(formActions) => 
-                    <VInput
-                        type                 = "text"
-                        formActions          = {formActions}
-                        /* Valium provides some custom constraints */
-                        disallowedValues     = {["Don't say no"]}
-                        render = {({valid, message}, inputRef) => 
-
-                            <input ref        = {inputRef}
-                                    name      = 'myText'
-                                    className = {valid ? 'is-valid' : 'is-invalid'}
-                                    value     = {myText}
-                                    onChange  = {(event) => setMyText(event.target.value)}
-                                    /* HTML Validation constraints are managed directly on HTML input elements*/
-                                    required  = {true}
-                                    minLength = {10}
-                                    maxLength = {50}
-                                    
-                            />
-
-                        }
-                    /> 
+         renderInputs= {(formActions) => 
+           <VInput
+              type                 = "text"
+              /* formActions must be passed to every VInput */
+              formActions          = {formActions}
+              /* Valium provides some custom constraints */
+              disallowedValues     = {["NO"]}
+              /* prematureValidation will not wait input to lose focus */
+              prematureValidation  = {true}
+              render = {({valid, message}, inputRef) => 
+                <div>
+                  <input ref       = {inputRef}
+                         name      = 'myText'
+                         className = {valid ? 'valid' : 'invalid'}
+                         value     = {myText}
+                         onChange  = {(event) => setMyText(event.target.value)}
+                         /* HTML Validation constraints are managed directly on HTML input elements*/
+                         required  = {true}
+                         minLength = {2}
+                         maxLength = {50}
+                  />
+                  <div className="valium-example-input-feedback">
+                    {message}
+                  </div>
+                </div>
               }
-        />
-      </div>
-    </>
+            /> 
+          }
+      />
   )
 } 
 
 ```
-
 
 ## Docs
 
