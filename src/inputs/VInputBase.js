@@ -44,6 +44,8 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
   const setValidity= useCallback(
     () => {
       if (inputRef!=undefined && inputRef.current!=undefined) {
+        //console.log(`${inputRef.current.name} => checking validity`)
+
         // Clear previous custom error
         inputRef.current.setCustomValidity('')
         inputRef.current.setAttribute('data-valium-validity', '')  
@@ -77,6 +79,8 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
 
   useEffect(() => {
     if (inputRef!=undefined && inputRef.current!=undefined) {
+
+      //console.log(`${inputRef.current.name} => useEffect`)
 
       const name= inputRef.current.name
       
@@ -167,6 +171,10 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
     }
   }, [iconfig, prematureValidation, bindSetValidity, doRepeat, doNotRepeat, setValidity])
   
+  //try{
+  //  console.log(`${inputRef.current.name} => render`)
+  //} catch(e) {}
+
   return render({valid, message}, inputRef)
 }
 

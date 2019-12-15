@@ -19,7 +19,7 @@ Even more: Valium extends these constraints:
 
 ## Premature Validation?
 
-Constraint Validation API checks for validation changes when the input changes. Depending on the browser, it may mean: when the input loses the focus.
+_HTML5 Constraint Validation API_ checks for validity changes when the input changes. Depending on the browser, it means: when the input loses the focus.
 
 Valium is here to make your Forms much nicer: with `prematureValidation`, the ValidityState is updated while typing!
 
@@ -33,14 +33,14 @@ Valium is here to make your Forms much nicer: with `prematureValidation`, the Va
 
 Valium provides just two elements: `VForm` and `VInput`.
 
-`VForm` will be the parent element. It just renders a <form> element, and provide a couple of render props (`renderInputs` and `renderButtons`) so you can render the rest.
+`VForm` will be the parent element. It just renders a `form` element, and provide a couple of render props (`renderInputs` and `renderButtons`) so you can render the rest.
 
 Then, any input inside the Form that you want to be validated, must be wrapped within a `VInput` element.
 
 Let's check a basic example [check it at CodePen](https://codepen.io/afialapis/pen/KKwgNWK):
 
 
-```
+```javascript
 import React, {useState} from 'react';
 import {VForm, VInput} from 'valium'
 
@@ -56,38 +56,44 @@ const MyValidatedForm = () => {
   }
 
   return (
-     
-    <VForm renderButtons= {(valid, elements) => 
-             <button disabled={! valid}
-                     onClick={(ev) => onSubmit(elements)}>
-               Save
-             </button>
-            }
+    <>
+      <div>
+        Valium Basic Example
+      </div>
+      <div>
+        <VForm renderButtons= {(valid, elements) => 
+                <button disabled={! valid}
+                        onClick={(ev) => onSubmit(elements)}>
+                  {"Save"}
+                </button>
+                }
 
-           renderInputs= {(formActions) => 
-                <VInput
-                    type                 = "text"
-                    formActions          = {formActions}
-                    {/* Validation constraints are passed as common HTML attributes*/}
-                    disallowedValues     = {["Don't say no"]}
-                    render = {({valid, message}, inputRef) => 
+              renderInputs= {(formActions) => 
+                    <VInput
+                        type                 = "text"
+                        formActions          = {formActions}
+                        /* Valium provides some custom constraints */
+                        disallowedValues     = {["Don't say no"]}
+                        render = {({valid, message}, inputRef) => 
 
-                                  <input ref       = {inputRef}
-                                         name      = 'myText'
-                                         className = {valid ? 'is-valid' : 'is-invalid'}
-                                         value     = {myText}
-                                         onChange  = {(event) => setMyText(event.target.value)}
-                                         {/* Validation constraints are passed as common HTML attributes*/}
-                                         required  = {true}
-                                         minLength = {10}
-                                         maxLength = {50}
-                                         
-                                  />
+                            <input ref        = {inputRef}
+                                    name      = 'myText'
+                                    className = {valid ? 'is-valid' : 'is-invalid'}
+                                    value     = {myText}
+                                    onChange  = {(event) => setMyText(event.target.value)}
+                                    /* HTML Validation constraints are managed directly on HTML input elements*/
+                                    required  = {true}
+                                    minLength = {10}
+                                    maxLength = {50}
+                                    
+                            />
 
-                              }
-                /> 
-           }
-    />
+                        }
+                    /> 
+              }
+        />
+      </div>
+    </>
   )
 } 
 

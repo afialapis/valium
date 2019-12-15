@@ -5,6 +5,7 @@ export default {
   rangeOverflow   : 'Value is greater than expected',
   rangeUnderflow  : 'Value is lesser than expected',
   stepMismatch    : 'Value has an incorrect number of decimals',
+  tooShort        : 'Value is shorter than expected',
   tooLong         : 'Value is longer than expected',
   typeMismatch    : 'Value type is wrong',
   valueMissing    : 'Value is required',

@@ -1,6 +1,6 @@
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
-//import replace from '@rollup/plugin-replace'
+import replace from '@rollup/plugin-replace'
 import resolve from 'rollup-plugin-node-resolve'
 import external from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
@@ -8,21 +8,70 @@ import { terser } from 'rollup-plugin-terser'
 
 import packageJSON from './package.json'
 
-//const NODE_ENV = process.env.NODE_ENV || 'development'
+const NODE_ENV = 'production'
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
 const input = './src/index.js';
 
 
-module.exports = [{
-  input: input,
-  output: [{
-    file: packageJSON.main,
+const baseCfg= (output, withReplace, withTerser) => {
+  let plugins= []
+  if (withReplace) {
+    plugins.push(
+      replace({
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
+      })      
+    )
+  }
+  plugins= plugins.concat([
+    babel({
+      exclude: 'node_modules/**'
+    }),
+    external(),
+    resolve(),
+    commonjs()  
+  ])
+  if (withTerser) {
+    plugins.push(
+      terser()
+    )
+  }
+
+  return {
+    input: input,
+    output: output,
+    plugins: plugins  
+  }
+}
+
+module.exports = [
+  //
+  // CommonJs
+  //
+  baseCfg({
+    file: 'dist/valium.js',
     format: 'cjs'
-  },{
+  }, false, false),
+  baseCfg({
+    file: 'dist/valium.min.js',
+    format: 'cjs'
+  }, false, true),
+  //
+  // ES modules
+  //
+  baseCfg({
     file: packageJSON.module,
     format: 'es',
     exports: 'named'
-  },{
+  }, true, false),
+  baseCfg({
+    file: minifyExtension(packageJSON.module),
+    format: 'es',
+    exports: 'named'
+  }, true, true),  
+  //
+  // UMD
+  //  
+  baseCfg({
     file: packageJSON.browser,
     format: 'umd',
     name: 'Valium',
@@ -30,65 +79,8 @@ module.exports = [{
       react: 'React',
       'prop-types': 'PropTypes'
     }
-  }
-  ],
-  external: id => /^react/.test(id),
-  plugins: [
-    /*replace({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-    }),*/
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    external(),
-    resolve(),
-    commonjs()
-  ],  
-},
-{
-  input: input,
-  output: {
-    file: minifyExtension(packageJSON.main),
-    format: 'cjs'
-  },
-  external: id => /^react/.test(id),
-  plugins: [
-    /*replace({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-    }),*/
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    external(),
-    resolve(),
-    commonjs(),
-    terser()
-  ],  
-},
-{
-  input: input,
-  output: {
-    file: minifyExtension(packageJSON.module),
-    format: 'es',
-    exports: 'named'
-  },
-  external: id => /^react/.test(id),
-  plugins: [
-    /*replace({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-    }),*/
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    external(),
-    resolve(),
-    commonjs(),
-    terser()
-  ],  
-},
-{
-  input: input,
-  output: {
+  }, true, false),
+  baseCfg({
     file: minifyExtension(packageJSON.browser),
     format: 'umd',
     name: 'Valium',
@@ -96,19 +88,6 @@ module.exports = [{
       react: 'React',
       'prop-types': 'PropTypes'
     }
-  },
-  external: id => /^react/.test(id),
-  plugins: [
-    /*replace({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-    }),*/
-    babel({
-      exclude: 'node_modules/**'
-    }),
-    external(),
-    resolve(),
-    commonjs(),
-    terser()
-  ],  
-}
+  }, true, true), 
+  
 ];

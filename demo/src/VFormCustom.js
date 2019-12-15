@@ -32,8 +32,8 @@ const getToday = (add= 0) => {
 const VFormCustom = () => {
   const [optPremature , setOptPremature] = useState(true)
 
-  const [controlledText , _setControlledText ] = useState("I'm too long")
-  const [uncontrolledText , setUncontrolledText  ] = useState("No")
+  const [controlledText , setControlledText ] = useState("NO")
+  const [uncontrolledText , _setUncontrolledText  ] = useState("I'm too long")
   const [longText , setLongText  ] = useState("Why are you staring at me, little Monster?")
   const [aNumber, _setANumber  ] = useState(2)
   const [aCheck , _setACheck] = useState(false)
@@ -97,11 +97,13 @@ const VFormCustom = () => {
                                     Is your Valium dose Controlled?
                                   </label>
                                   <input ref      = {inputRef}
-                                        name      = 'uncontrolledText'
-                                        value     = {uncontrolledText}
+                                        name      = 'controlledText'
+                                        value     = {controlledText}
                                         className = {valid ? 'valid' : 'invalid'}
                                         required  = {true}
-                                        onChange  = {(event) => setUncontrolledText(event.target.value)}>
+                                        minLength = {10}
+                                        maxLength = {50}
+                                        onChange  = {(event) => setControlledText(event.target.value)}>
                                   </input>
                                   <div className="valium-example-input-feedback">
                                     {message}
@@ -111,9 +113,8 @@ const VFormCustom = () => {
                 />            
                 <VInput
                     type                 = "text"
-                    disallowedValues     = {["NO"]}
                     prematureValidation  = {optPremature}
-                    doNotRepeat          = "uncontrolledText"
+                    doNotRepeat          = "controlledText"
                     formActions          = {formActions}
                     render =  {({valid, message}, inputRef) => 
                                 <div className="valium-example-input-group">
@@ -121,8 +122,8 @@ const VFormCustom = () => {
                                     Or did you leave it Uncontrolled?
                                   </label>
                                   <input ref         = {inputRef}
-                                        name         = 'controlledText'
-                                        defaultValue = {controlledText}
+                                        name         = 'uncontrolledText'
+                                        defaultValue = {uncontrolledText}
                                         className    = {valid ? 'valid' : 'invalid'}
                                         required     = {false}
                                         maxLength    = {5}>
