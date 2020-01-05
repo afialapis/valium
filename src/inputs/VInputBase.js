@@ -180,6 +180,7 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
 
 
 VInputBase.propTypes = {
+  config              : PropTypes.object,
   feedback            : PropTypes.string,
   render              : PropTypes.func.isRequired,
   checkValue          : PropTypes.Promise || PropTypes.func,

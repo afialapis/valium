@@ -1,5 +1,12 @@
 # valium
 
+![Valium logo](https://valium.afialapis.com/assets/images/logo/valium_name.png)
+
+[![NPM Version](https://badge.fury.io/js/valium.svg)](https://www.npmjs.com/package/valium)
+[![Dependency Status](https://david-dm.org/afialapis/valium.svg)](https://david-dm.org/afialapis/valium)
+[![NPM Downloads](https://img.shields.io/npm/dm/valium.svg?style=flat)](https://www.npmjs.com/package/valium)
+
+
 A Form validator for React, using and customizing [HTML5 Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation).
 
 ## Demo
@@ -39,7 +46,7 @@ Then, any input inside the Form that you want to be validated, must be wrapped w
 
 ### Basic example
 
-Let's check a basic example [check it at CodePen](https://codepen.io/afialapis/pen/KKwgNWK):
+Let's check a basic example ([try it at CodePen](https://codepen.io/afialapis/pen/KKwgNWK)):
 
 
 ```javascript
