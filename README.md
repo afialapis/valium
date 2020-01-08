@@ -6,14 +6,23 @@
 [![Dependency Status](https://david-dm.org/afialapis/valium.svg)](https://david-dm.org/afialapis/valium)
 [![NPM Downloads](https://img.shields.io/npm/dm/valium.svg?style=flat)](https://www.npmjs.com/package/valium)
 
-
 A Form validator for React, using and customizing [HTML5 Constraint Validation API](https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation).
 
-## Demo
+# Table of Contents
+
+1. [Demo](#demo)
+2. [HTML5 Constraint Validation API?](#html5-constraint-validation-api)
+3. [Premature Validation?](#premature-Validation)
+4. [Install](#install)
+5. [Getting started](#getting-started)
+6. [Docs](#docs)
+
+
+# Demo
 
 Check a live demo at [valium.afialapis.com](https://valium.afialapis.com)
 
-## HTML5 Constraint Validation API?
+# HTML5 Constraint Validation API?
 
 Yes: instead of providing lots of verbose-methods-you-must-learn to validate your inputs, Valium will just:
   - let you render your input elements _completely as you need_
@@ -24,19 +33,19 @@ Even more: Valium extends these constraints:
   - it accepts some custom constraints (`allowedValues` or `disallowedValues` lists, `doRepeat` or `doNotRepeat` other form's fields, or even a custom `checkValue` callback)
   - checks these custom constraints and updates accordingly the element's [ValidityState](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState)
 
-## Premature Validation?
+# Premature Validation?
 
 _HTML5 Constraint Validation API_ checks for validity changes when the input changes. Depending on the browser, it means: when the input loses the focus.
 
 Valium is here to make your Forms much nicer: with `prematureValidation`, the ValidityState is updated while typing!
 
-## Install
+# Install
 
 ```
   npm i valium
 ```
 
-## Getting started 
+# Getting started 
 
 Valium provides just two elements: `VForm` and `VInput`.
 
@@ -44,7 +53,7 @@ Valium provides just two elements: `VForm` and `VInput`.
 
 Then, any input inside the Form that you want to be validated, must be wrapped within a `VInput` element.
 
-### Basic example
+## Basic example
 
 Let's check a basic example ([try it at CodePen](https://codepen.io/afialapis/pen/KKwgNWK)):
 
@@ -95,7 +104,7 @@ const MyValidatedForm = () => {
 
 ```
 
-## Docs
+# Docs
 
 For complete docs, check [valium.afialapis.com](https://valium.afialapis.com)
 
