@@ -8,7 +8,8 @@ const countDecimals = (f) => {
   }
 }
 
-const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat) => {
+
+const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange) => {
   const input= inputRef.current
   if (input==undefined) {
     return ''
@@ -27,12 +28,35 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
     if (vs.patternMismatch) { return defaultMessages['patternMismatch'] }
     if (vs.rangeOverflow  ) { return defaultMessages['rangeOverflow'] }
     if (vs.rangeUnderflow ) { return defaultMessages['rangeUnderflow'] }
-    if (vs.stepMismatch   ) { return defaultMessages['stepMismatch'] }
     if (vs.tooLong        ) { return defaultMessages['tooLong'] }
     if (vs.tooShort       ) { return defaultMessages['tooShort'] }
     if (vs.typeMismatch   ) { return defaultMessages['typeMismatch'] }
     if (vs.valueMissing   ) { return defaultMessages['valueMissing'] }
-    if (vs.valid===false  ) { return defaultMessages['valid'] }
+    if (input.step!=undefined /*&& input.step!=='' && input.step!=='any'*/) {
+      //
+      // For steppable inputs
+      //
+      if (stepRange==undefined || isNaN(stepRange)) {
+        //
+        // If stepRange is specified, we omit the standard validations...
+        //
+        if (vs.stepMismatch   ) { return defaultMessages['stepMismatch'] }
+        if (vs.valid===false  ) { return defaultMessages['valid'] }
+      } else {
+        //
+        // ... and we proceed with our custom stepRange
+        //
+        if (countDecimals(stepRange)<countDecimals(value)) {
+          return defaultMessages['stepMismatch']
+        }          
+      }
+    } else {
+      //
+      // for non steppable inputs
+      //
+      if (vs.valid===false  ) { return defaultMessages['valid'] }
+    }
+    
   }
 
   // When loading document, minlength/maxlength/step constraints are not checked
@@ -44,10 +68,13 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   if (input.minLength && input.minLength>0 && value.length<input.minLength) {
     return defaultMessages['tooShort']
   }
-  if (input.step!=undefined && input.step!=='') {
-    if (countDecimals(input.step)<countDecimals(value)) {
-      return defaultMessages['stepMismatch']
-    }      
+  
+  if (input.step!=undefined && input.step!=='' && input.step!=='any') {
+    if (stepRange==undefined || isNaN(stepRange)) {
+      if (countDecimals(input.step)!=countDecimals(value)) {
+        return defaultMessages['stepMismatch']
+      }
+    }
   }
 
   // Custom validate function

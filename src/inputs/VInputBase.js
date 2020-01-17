@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import checkValidity from '../validity/check'
 
-const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, prematureValidation,  feedback, formActions, bindSetValidity, render}) => {  
+const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange, prematureValidation, feedback, formActions, bindSetValidity, render}) => {  
 
   const iconfig= {
     dbg_assertType   : undefined,
@@ -53,7 +53,7 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
         // Check error if any
         const value = iconfig.getValue(inputRef)
         const validity= checkValidity(inputRef, value, iconfig.parseForCompare, 
-                                    checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat)
+                                    checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange)
         const message= validity==''
                       ? ''
                       : feedback || validity
@@ -73,7 +73,7 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
         }      
       }
     }, 
-    [iconfig, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, feedback, formActions]
+    [iconfig, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange, feedback, formActions]
   )
 
 
@@ -169,7 +169,7 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
       }
       return clean
     }
-  }, [iconfig, prematureValidation, bindSetValidity, doRepeat, doNotRepeat, setValidity])
+  }, [iconfig, prematureValidation, bindSetValidity, doRepeat, doNotRepeat, stepRange, setValidity])
   
   //try{
   //  console.log(`${inputRef.current.name} => render`)
@@ -188,6 +188,7 @@ VInputBase.propTypes = {
   disallowedValues    : PropTypes.arrayOf(PropTypes.any),
   doRepeat            : PropTypes.string,
   doNotRepeat         : PropTypes.string,
+  stepRange           : PropTypes.number,
   prematureValidation : PropTypes.bool,
   formActions         : PropTypes.object.isRequired
 }

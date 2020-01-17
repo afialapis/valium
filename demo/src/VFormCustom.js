@@ -35,7 +35,7 @@ const VFormCustom = () => {
   const [controlledText , setControlledText ] = useState("NO")
   const [uncontrolledText , _setUncontrolledText  ] = useState("I'm too long")
   const [longText , setLongText  ] = useState("Why are you staring at me, little Monster?")
-  const [aNumber, _setANumber  ] = useState(2)
+  const [aNumber, _setANumber  ] = useState(2.123456)
   const [aCheck , _setACheck] = useState(false)
   const [aColor , _setAColor] = useState('#FF00FF')
   const [aDate  , _setaDate ] = useState(getToday(1))
@@ -138,6 +138,7 @@ const VFormCustom = () => {
                 <VInput
                     type                 = "number"
                     disallowedValues     = {[0, 3]}
+                    stepRange            = {0.12345} // This disables the input's step
                     prematureValidation  = {optPremature}
                     formActions          = {formActions}
                     render  ={({valid, message}, inputRef) => 
@@ -148,7 +149,7 @@ const VFormCustom = () => {
                                   <input ref          = {inputRef}
                                         type         = "number"
                                         name         = "aNumber"
-                                        /*step         = {0.1}*/
+                                        step         = "any"
                                         value = {aNumber}
                                         onChange = {(ev) => _setANumber(ev.target.value)}
                                         className    = {valid ? 'valid' : 'invalid'}>
