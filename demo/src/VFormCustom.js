@@ -138,7 +138,7 @@ const VFormCustom = () => {
                 <VInput
                     type                 = "number"
                     disallowedValues     = {[0, 3]}
-                    stepRange            = {0.12345} // This disables the input's step
+                    stepRange            = {0.00000000001} // This disables the input's step
                     prematureValidation  = {optPremature}
                     formActions          = {formActions}
                     render  ={({valid, message}, inputRef) => 
@@ -149,7 +149,7 @@ const VFormCustom = () => {
                                   <input ref          = {inputRef}
                                         type         = "number"
                                         name         = "aNumber"
-                                        step         = "any"
+                                        //step         = "any"
                                         value = {aNumber}
                                         onChange = {(ev) => _setANumber(ev.target.value)}
                                         className    = {valid ? 'valid' : 'invalid'}>
