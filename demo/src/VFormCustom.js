@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {VForm, VInput} from '../../src'
 
 const LIST_OPTIONS= {
+  '': '---',
   '1': "It's fascinating",
   '2': "It's cool",
   '3': "Well... beh!",
@@ -231,7 +232,7 @@ const VFormCustom = () => {
               <div className="column">
                 <VInput
                     type                 = "select"
-                    disallowedValues     = {['3', '4']}
+                    /*disallowedValues     = {['3', '4']}*/
                     formActions          = {formActions}
                     render = {({valid, message}, inputRef) => 
                                 <div className="valium-example-input-group">
@@ -242,7 +243,9 @@ const VFormCustom = () => {
                                           name         = "aList"
                                           value        = {aList}
                                           onChange     = {(ev) => setAList(ev.target.value)}
-                                          className    = {valid ? 'valid' : 'invalid'}>
+                                          className    = {valid ? 'valid' : 'invalid'}
+                                          required     = {true}
+                                          >
                                     {Object.keys(LIST_OPTIONS).map((o) => 
                                       <option key={`single-select-option-${o}`}
                                               value={o}>

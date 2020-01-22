@@ -81,6 +81,12 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
     }
   }
 
+  // Some inputs like hidden and select, wont perform 
+  // the standard required validation
+  if (input.required && (value=='' || value==undefined)) {
+    return defaultMessages['valueMissing'];
+  }  
+
   // Custom validate function
   if (checkValue!=undefined) {
     const result= checkValue(value)
