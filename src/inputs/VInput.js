@@ -48,7 +48,7 @@ VInput.propTypes = {
   doRepeat            : PropTypes.string,
   doNotRepeat         : PropTypes.string,
   prematureValidation : PropTypes.bool,
-  formActions         : PropTypes.object.isRequired  
+  formActions         : PropTypes.object  
 }
 
 
