@@ -157,9 +157,11 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
 
       // clean listeners function
       const removeAllChangeListeners = () => {
-        Object.keys(allListeners).map((eventType) => {
-          inputRef.current.removeEventListener(eventType, allListeners[eventType])
-        })
+        if (inputRef.current!=undefined) {
+          Object.keys(allListeners).map((eventType) => {
+            inputRef.current.removeEventListener(eventType, allListeners[eventType])
+          })
+        }
       }    
       
       // return clean function
