@@ -37,7 +37,7 @@ const VFormCustom = () => {
   const [uncontrolledText , _setUncontrolledText  ] = useState("I'm too long")
   const [longText , setLongText  ] = useState("Why are you staring at me, little Monster?")
   const [aNumber, _setANumber  ] = useState(2.123456)
-  const [aCheck , _setACheck] = useState(false)
+  const [aCheck , setACheck] = useState(false)
   const [aColor , _setAColor] = useState('#FF00FF')
   const [aDate  , _setaDate ] = useState(getToday(1))
   const [aList  , setAList ] = useState('1')
@@ -173,7 +173,8 @@ const VFormCustom = () => {
                                   <input ref          = {inputRef}
                                         type         = "checkbox"
                                         name         = "aCheck"
-                                        defaultValue = {aCheck}
+                                        value = {aCheck}
+                                        onChange = {(v) => setACheck(v)}
                                         className    = {valid ? 'valid' : 'invalid'}>
                                   </input>
                                   <div className="valium-example-input-feedback">

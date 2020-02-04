@@ -12,8 +12,8 @@ const VInputCheckbox = (props) => {
                                      : undefined,
     rightAfterMount: (inputRef) => {
       if (inputRef!=undefined && inputRef.current!=undefined) {
-        if (inputRef.value==='true' || inputRef.value===true) {
-          inputRef.setAttribute('checked', true)
+        if (inputRef.current.value==='true' || inputRef.current.value===true) {
+          inputRef.current.setAttribute('checked', true)
         }        
       }
     },
