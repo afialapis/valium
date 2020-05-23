@@ -150,7 +150,6 @@ const VFormCustom = () => {
                                   <input ref          = {inputRef}
                                         type         = "number"
                                         name         = "aNumber"
-                                        //step         = "any"
                                         value = {aNumber}
                                         onChange = {(ev) => _setANumber(ev.target.value)}
                                         className    = {valid ? 'valid' : 'invalid'}>

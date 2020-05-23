@@ -36,25 +36,15 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
     if (vs.tooShort       ) { return defaultMessages['tooShort'] }
     if (vs.typeMismatch   ) { return defaultMessages['typeMismatch'] }
     if (vs.valueMissing   ) { return defaultMessages['valueMissing'] }
-    if (input.step!=undefined /*&& input.step!=='' && input.step!=='any'*/) {
+
+    if (stepRange!=undefined && ! isNaN(stepRange)) {
       //
-      // For steppable inputs
+      // For custom steppable inputs
       //
-      if (stepRange==undefined || isNaN(stepRange)) {
-        //
-        // If stepRange is specified, we omit the standard validations...
-        //
-        if (vs.stepMismatch   ) { return defaultMessages['stepMismatch'] }
-        if (vs.valid===false  ) { return defaultMessages['valid'] }
-      } else {
-        //
-        // ... and we proceed with our custom stepRange
-        //
-        if (countDecimals(stepRange)<countDecimals(value)) {
-          return defaultMessages['stepMismatch']
-        }          
+      if (countDecimals(stepRange)<countDecimals(value)) {
+        return defaultMessages['stepMismatch']
       }
-    } else {
+    } else if (input.step != undefined) {
       //
       // for non steppable inputs
       //
