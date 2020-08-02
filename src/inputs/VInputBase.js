@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import checkValidity from '../validity/check'
 
-const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange, prematureValidation, feedback, formActions, bindSetValidity, render}) => {  
+const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange, inputFilter, prematureValidation, feedback, formActions, bindSetValidity, render}) => {  
 
   const iconfig= {
     dbg_assertType   : undefined,
@@ -18,6 +18,8 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
     // TODO Investigate why
     //
     premature_event  : 'keyup,paste', // 'input',
+    //
+    input_filter_events : ['input', 'keydown', 'keyup', 'mousedown', 'mouseup', 'select', 'contextmenu', 'drop'],
     //
     getValue         : (inputRef) => {
       if(inputRef!=undefined && inputRef.current!=undefined) {
@@ -155,6 +157,30 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
       inputRef.current.addEventListener(iconfig.change_event, changeListener)
       allListeners[iconfig.change_event]= changeListener
 
+      // Input Filter listeners
+      // Credits to:
+      // https://stackoverflow.com/a/469362
+      // https://jsfiddle.net/emkey08/zgvtjc51
+      if (inputFilter!=undefined) {
+        iconfig.input_filter_events.forEach(function(eventType) {
+          const filterEventListener = function() {
+            const inp= inputRef.current
+            if (inputFilter(inp.value)) {
+              inp.oldValue = inp.value
+              inp.oldSelectionStart = inp.selectionStart
+              inp.oldSelectionEnd = inp.selectionEnd
+            } else if (Object.hasOwnProperty.call(inp, "oldValue")) {
+              inp.value = inp.oldValue
+              inp.setSelectionRange(inp.oldSelectionStart, inp.oldSelectionEnd)
+            } else {
+              inp.value = ""
+            }
+          }
+          inputRef.current.addEventListener(eventType, filterEventListener)
+          allListeners[eventType]= filterEventListener
+        })
+      }
+
       // clean listeners function
       const removeAllChangeListeners = () => {
         if (inputRef.current!=undefined) {
@@ -171,7 +197,7 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
       }
       return clean
     }
-  }, [iconfig, prematureValidation, bindSetValidity, doRepeat, doNotRepeat, stepRange, setValidity])
+  }, [iconfig, prematureValidation, bindSetValidity, doRepeat, doNotRepeat, stepRange, inputFilter, setValidity])
   
   //try{
   //  console.log(`${inputRef.current.name} => render`)
@@ -191,6 +217,7 @@ VInputBase.propTypes = {
   doRepeat            : PropTypes.string,
   doNotRepeat         : PropTypes.string,
   stepRange           : PropTypes.number,
+  inputFilter         : PropTypes.func,
   prematureValidation : PropTypes.bool,
   formActions         : PropTypes.object.isRequired
 }
