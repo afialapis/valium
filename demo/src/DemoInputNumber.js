@@ -2,7 +2,7 @@ import React from 'react'
 import {VInput} from '../../src'
 import useValue from './useValue'
 import DemoInputGroup from './DemoInputGroup'
-
+import {fltFloat} from './inputFilters'
 
 const DemoInputNumber = ({formActions, premature, controlled}) => {
 
@@ -15,8 +15,7 @@ const DemoInputNumber = ({formActions, premature, controlled}) => {
           disallowedValues     = {[0, 3]}
           stepRange            = {0.00000000001} // This disables the input's step
           prematureValidation  = {premature}
-          //inputFilter          = {(v) => /^-?\d*[.,]?\d*$/i.test(v)}
-          inputFilter          = {(v) => /^\d*$/.test(v)}
+          inputFilter          = {fltFloat}
           formActions          = {formActions}
           render  ={({valid, message}, inputRef) => 
             <DemoInputGroup 

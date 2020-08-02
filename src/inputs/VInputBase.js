@@ -19,7 +19,11 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
     //
     premature_event  : 'keyup,paste', // 'input',
     //
-    input_filter_events : ['input', 'keydown', 'keyup', 'mousedown', 'mouseup', 'select', 'contextmenu', 'drop'],
+    // This event list owould cover every need:
+    // ['input', 'keydown', 'keyup', 'mousedown', 'mouseup', 'select', 'contextmenu', 'drop'],
+    // But lets start simple and easy. 
+    // TODO Input Filters must be tested on every input type. Right now just accept them on 'text' inputs
+    input_filter_events : ['input'], 
     //
     getValue         : (inputRef) => {
       if(inputRef!=undefined && inputRef.current!=undefined) {
@@ -163,15 +167,25 @@ const VInputBase = ({config, checkValue, allowedValues, disallowedValues, doRepe
       // https://jsfiddle.net/emkey08/zgvtjc51
       if (inputFilter!=undefined) {
         iconfig.input_filter_events.forEach(function(eventType) {
-          const filterEventListener = function() {
+          const filterEventListener = function(event) {
             const inp= inputRef.current
-            if (inputFilter(inp.value)) {
+            // console.log(inp)
+            // console.log(`value [${inp.value}] / [${event.target.value}] - old ${inp.oldValue} - ${eventType} ==> ${inputFilter(inp.value)} ${Object.hasOwnProperty.call(inp, "oldValue")}`)
+
+            // TODO This first check asserting inp.value was introduced to make input type 'number' work
+            //      (cause typing an invalid number would return an empty value)
+            //      But detailed checks must be done and probably find a better solution, as probabky this check
+            //      has unexpected consequences... will see
+            if (inp.value && inputFilter(inp.value)) {
               inp.oldValue = inp.value
               inp.oldSelectionStart = inp.selectionStart
               inp.oldSelectionEnd = inp.selectionEnd
             } else if (Object.hasOwnProperty.call(inp, "oldValue")) {
               inp.value = inp.oldValue
-              inp.setSelectionRange(inp.oldSelectionStart, inp.oldSelectionEnd)
+              try {
+                // TODO This fails if input.type is 'number'. Dunno why yet.
+                inp.setSelectionRange(inp.oldSelectionStart, inp.oldSelectionEnd)
+              } catch(e) {}
             } else {
               inp.value = ""
             }

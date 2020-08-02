@@ -5,7 +5,7 @@ module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   context: __dirname,
   entry: [
-    './src/demo.js'
+    './src/Demo.js'
   ],
   output: {
     path: __dirname,

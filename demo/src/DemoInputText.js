@@ -2,7 +2,7 @@ import React from 'react';
 import {VInput} from '../../src'
 import useValue from './useValue'
 import DemoInputGroup from './DemoInputGroup'
-
+import {fltLatin} from './inputFilters'
 
 const DemoInputText = ({formActions, premature, controlled}) => {
 
@@ -14,7 +14,7 @@ const DemoInputText = ({formActions, premature, controlled}) => {
           type                 = "text"
           disallowedValues     = {["John Doe"]}
           prematureValidation  = {premature}
-          /*inputFilter          = {(v) => /^[a-z]*$/i.test(v)}*/
+          inputFilter          = {fltLatin}
           formActions          = {formActions}
           render = {({valid, message}, inputRef) => 
             <DemoInputGroup 
