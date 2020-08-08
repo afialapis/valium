@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import TestUtils from 'react-dom/test-utils'
 import co from "co"
 import ES6Promise from 'es6-promise'
-import UUID from "node-uuid"
+import { v4 as uuidv4 } from 'uuid';
 import assert from 'assert'
 import {VForm, VInput} from '../src/index'
 
@@ -26,7 +26,7 @@ describe('Valium', function() {
   }) 
   
   it("should render an empty form.", co.wrap(function *(){
-    const id = UUID.v4()
+    const id = uuidv4()
     const App = () => {
       return (
         <div>
