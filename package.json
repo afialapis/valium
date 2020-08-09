@@ -19,22 +19,19 @@
     "lib",
     "dist"
   ],
-  "main": "lib/index.js",
+  "main": "dist/valium.js",
   "browser": "dist/valium.umd.js",
   "module": "dist/valium.es.js",
   "scripts": {
     "lint": "eslint src",
     "test": "karma start test/karma.conf.js",
     "test-run": "karma start test/karma.conf.js --no-single-run",
-    "clean-lib": "rimraf dist && mkdir dist",
+    "clean-lib": "rm -rf dist && mkdir dist",
     "lib": "npm run clean-lib && babel src -d lib",
-    "clean-dist": "rimraf dist && mkdir dist",
-    "old_build-dist": "webpack",
-    "old_build-dist-min": "NODE_ENV=production webpack",
-    "old_dist": "npm run clean-dist && npm run build-dist && npm run build-dist-min",
+    "clean-dist": "rm -rf dist && mkdir dist",
     "dist": "rollup -c",
     "prepare": "npm run test && npm run lib && npm run dist",
-    "demo": "NODE_ENV=development node demo/server"
+    "demo": "rm -rf demo/dist && mkdir demo/dist && rollup -c rollup.demo.js -w"
   },
   "keywords": [
     "js",
@@ -79,16 +76,14 @@
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "rimraf": "^3.0.2",
     "rollup": "^2.23.1",
+    "rollup-plugin-livereload": "^1.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-scss": "^2.5.0",
+    "rollup-plugin-serve": "^1.0.3",
     "rollup-plugin-terser": "^6.1.0",
     "sass-loader": "^9.0.3",
-    "terser-webpack-plugin": "^4.0.0",
-    "uuid": "^8.3.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^4.44.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2"

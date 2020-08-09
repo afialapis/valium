@@ -38,7 +38,7 @@ package-lock.json
 .vscode
 logo
 issues
-src.class
 codepen
 .npmignore
 TODO.lst
+.old

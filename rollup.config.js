@@ -49,11 +49,11 @@ module.exports = [
   // CommonJs
   //
   baseCfg({
-    file: 'dist/valium.js',
+    file: packageJSON.main,
     format: 'cjs'
   }, false, false),
   baseCfg({
-    file: 'dist/valium.min.js',
+    file: minifyExtension(packageJSON.main),
     format: 'cjs'
   }, false, true),
   //

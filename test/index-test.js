@@ -1,11 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import TestUtils from 'react-dom/test-utils'
 import co from "co"
 import ES6Promise from 'es6-promise'
-import { v4 as uuidv4 } from 'uuid';
 import assert from 'assert'
-import {VForm, VInput} from '../src/index'
+import {VForm} from '../src/index'
 
 
 ES6Promise.polyfill()
@@ -26,11 +24,11 @@ describe('Valium', function() {
   }) 
   
   it("should render an empty form.", co.wrap(function *(){
-    const id = uuidv4()
+    const fid= 'valium_empty_form'
     const App = () => {
       return (
         <div>
-          <VForm id           = {id} 
+          <VForm id           = {fid}
                  renderButtons= {() => <div/>}
                  renderInputs={(_fUpd) => <div/>}>
           </VForm>
@@ -42,7 +40,7 @@ describe('Valium', function() {
       ReactDOM.render(<App />, container, resolve)
     })
     
-    const emptyFormElement = document.getElementById(id)
+    const emptyFormElement = document.getElementById(fid)
     assert.notEqual(emptyFormElement.getAttribute('class').indexOf('valium-form'), -1)
     ReactDOM.unmountComponentAtNode(container)
   }))  

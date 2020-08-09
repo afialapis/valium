@@ -12,7 +12,6 @@ const countDecimals = (f) => {
   }
 }
 
-
 const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange) => {
   const input= inputRef.current
   if (input==undefined) {
