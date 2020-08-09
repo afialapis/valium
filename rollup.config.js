@@ -23,9 +23,11 @@ const baseCfg= (output, withReplace, withTerser) => {
   }
   plugins= plugins.concat([
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
+      /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
+      babelHelpers: 'runtime'
     }),
-    external(),
+    external([/@babel\/runtime/, 'react', 'prop-types']),
     resolve(),
     commonjs()  
   ])
