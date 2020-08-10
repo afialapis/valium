@@ -42,3 +42,4 @@ codepen
 .npmignore
 TODO.lst
 .old
+test/bundle.js
