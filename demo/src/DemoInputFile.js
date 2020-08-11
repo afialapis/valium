@@ -1,12 +1,12 @@
 import React from 'react';
 import {VInput} from '../../src'
-import useValue from './useValue'
 import DemoInputGroup from './DemoInputGroup'
-
 
 const DemoInputFile = ({formActions, controlled}) => {
 
-  const valueProps= useValue(undefined, controlled)
+  if (controlled) {
+    return null
+  }
 
   return (
       <VInput
@@ -18,10 +18,10 @@ const DemoInputFile = ({formActions, controlled}) => {
               message = {message}>
               <input ref      = {inputRef}
                     type      = "file"
-                    name      = 'theFile'
+                    name      = {'theFile'+controlled}
                     className = {valid ? 'valid' : 'invalid'}
                     required  = {true}
-                    {...valueProps}/>
+                    />
             </DemoInputGroup>
           }
       />            

@@ -17,7 +17,7 @@ const VInputFile = (props) => {
       return undefined      
     }
   }
-
+  
   const nprops= {
     ...props,
     config: nconfig

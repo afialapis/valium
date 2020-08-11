@@ -49,6 +49,7 @@ VInput.propTypes = {
   doNotRepeat         : PropTypes.string,
   prematureValidation : PropTypes.bool,
   stepRange           : PropTypes.number,
+  inputFilter         : PropTypes.func,
   formActions         : PropTypes.object  
 }
 
