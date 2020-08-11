@@ -1,6 +1,6 @@
 {
   "name": "valium",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "A Form validator for React, using and customizing HTML5 Constraint Validation API",
   "author": "Donato Lorenzo <donato@afialapis.com>",
   "contributors": [
@@ -29,7 +29,7 @@
     "lint": "eslint src",
     "test": "npm run clean-test && rollup -c rollup.test.js && karma start --singleRun",
     "lib": "npm run clean-lib && babel src -d lib",
-    "dist": "rollup -c",
+    "dist": "npm run clean-dist && rollup -c",
     "prepare": "npm run test && npm run lib && npm run dist",
     "demo": "rm -rf demo/dist && mkdir demo/dist && rollup -c rollup.demo.js -w"
   },
