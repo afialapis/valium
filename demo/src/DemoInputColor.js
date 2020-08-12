@@ -15,6 +15,7 @@ const DemoInputColor = ({formActions, controlled}) => {
           disallowedValues     = {['#000000', '#FFFFFF', '#ffffff']}
           feedback             = "Neither black nor white"
           formActions          = {formActions}
+          prematureValidation = {true}
           render = {({valid, message}, inputRef) => 
             <DemoInputGroup 
               label   = {"What color has your world now?"}

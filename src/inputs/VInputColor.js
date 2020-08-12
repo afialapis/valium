@@ -84,7 +84,7 @@ const VInputColor = (props) => {
   const nconfig= {
     ...props.config,
     dbg_assertType : 'color',
-    premature_event: 'input',
+    premature_event: 'change',
     
     parseForCompare: (value) => {
       if (value===undefined || value==='') {
