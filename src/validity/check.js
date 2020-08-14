@@ -93,7 +93,7 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   }
 
   // Allowed values list
-  if (allowedValues != undefined && value!=undefined) {
+  if (allowedValues != undefined && value!=undefined && value!='') {
     const exists= allowedValues
       .map((v) => parseForCompare(v))
       .indexOf(parseForCompare(value)) >= 0
@@ -103,7 +103,7 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   }
 
   // Disallowed values list
-  if (disallowedValues != undefined && value!=undefined) {
+  if (disallowedValues != undefined && value!=undefined && value!='') {
     const exists= disallowedValues
       .map((v) => parseForCompare(v))
       .indexOf(parseForCompare(value)) >= 0
@@ -113,7 +113,7 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   }
 
   // Must repeat other's input value
-  if (doRepeat!=undefined && value!=undefined) {
+  if (doRepeat!=undefined && value!=undefined  && value!='') {
     const otherInput= input.form.elements[doRepeat]
     if (otherInput!=undefined) {
       if(otherInput.value != value) {
@@ -127,7 +127,7 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   }
 
   // Do not repeat other's input value
-  if (doNotRepeat!=undefined && value!=undefined) {
+  if (doNotRepeat!=undefined && value!=undefined  && value!='') {
     const otherInput= input.form.elements[doNotRepeat]
     if (otherInput!=undefined) {
       if(otherInput.value == value) {
