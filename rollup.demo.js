@@ -3,13 +3,13 @@ import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import resolve from '@rollup/plugin-node-resolve'
 //import external from 'rollup-plugin-peer-deps-external'
-import scss from 'rollup-plugin-scss'
+import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
 const NODE_ENV = 'development'
 export default {
-  input: 'demo/src/Demo.js',
+  input: 'demo/index.js',
   output: {
     file: 'demo/dist/bundle.js',
     format: 'umd',

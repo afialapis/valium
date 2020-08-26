@@ -49,7 +49,6 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
       //
       if (vs.valid===false  ) { return defaultMessages['valid'] }
     }
-    
   }
 
   // When loading document, minlength/maxlength/step constraints are not checked

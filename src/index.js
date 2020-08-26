@@ -1,4 +1,4 @@
 import VForm          from './VForm'
-import VInput         from './inputs/VInput'
+import VInput         from './VInput'
 
 export {VForm, VInput}

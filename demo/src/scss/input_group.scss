@@ -1,0 +1,57 @@
+.valium-example-input-group {
+  margin-top: 1em;
+
+  .valium-example-input-description {
+    display: flex;
+
+    label {
+      display: block;
+      flex: 1 0 auto;
+      color: #555050;
+    }
+
+    .valium-example-input-description-text {
+      color: #473939;
+      font-size: 12px;
+
+    }
+  }
+
+  input, 
+  textarea, 
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
+  input,
+  textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: rgb(101, 114, 233);
+  }
+
+  input.invalid,
+  textarea.invalid,
+  select.invalid {
+    border-color: red;
+  }
+  .valium-example-input-feedback {
+    color: red;
+    font-style: italic;
+    font-size: 0.8em;
+  }
+
+  input.valid > .valium-example-input-feedback,
+  textarea.valid > .valium-example-input-feedback,
+  select.valid > .valium-example-input-feedback {
+    display: none;
+  }
+}
