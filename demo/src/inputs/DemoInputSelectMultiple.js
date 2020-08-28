@@ -4,28 +4,25 @@ import DemoInputGroup from './DemoInputGroup'
 
 const LISTM_OPTIONS= {
   '1': "08:00",
-  '2': "10:00",
-  '3': "12:00",
-  '4': "14:00",
-  '5': "16:00",
-  '6': "18:00",
-  '7': "20:00",
-  '8': "22:00",
+  '2': "09:00",
+  '3': "10:00",
+  '4': "11:00",
+  '5': "12:00",
+  '6': "13:00",
+  '7': "14:00",
+  '8': "15:00",
 }
 
 
 const DemoInputSelectMultiple = ({formActions, onLog}) => {
 
-  const [times, setTimes]= useState(['1','2'])
+  const [times, setTimes]= useState(['3', '5', '7'])
 
   const handleTimesChange = (ev) => {
-    console.log(ev.target.options)
     const nTimes= Array.prototype.slice.call(ev.target.options)
         .filter((opt) => opt.selected)
         .map((opt) => opt.value)
     
-    console.log(nTimes)
-
     setTimes(nTimes)
     onLog(`Times for valium: ${JSON.stringify(nTimes)}`)
   }
@@ -33,12 +30,12 @@ const DemoInputSelectMultiple = ({formActions, onLog}) => {
   return (
       <VInput
           type           = "select-multiple"
-          allowedValues  = {[[], ['1']]}
+          allowedValues  = {[['1', '3', '5', '7']]}
           formActions    = {formActions}
           render = {({valid, message}, inputRef) => 
             <DemoInputGroup 
               label       = {"What times you prefer to take a Valium?"}
-              description = ""
+              description = "All even hours required"
               message     = {message}>
 
               <select ref          = {inputRef}

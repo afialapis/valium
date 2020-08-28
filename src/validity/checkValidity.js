@@ -1,4 +1,5 @@
 import defaultMessages from './messages'
+import parseForCompare from './compare'
 
 const countDecimals = (f) => {
   try {
@@ -12,7 +13,7 @@ const countDecimals = (f) => {
   }
 }
 
-const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, stepRange) => {
+const  checkValidity = (inputRef, value, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, decimals) => {
   const input= inputRef.current
   if (input==undefined) {
     return ''
@@ -24,6 +25,7 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   }
 
   const name= input.name
+  const inputType= input.type.toLowerCase()
 
   const vs= input.validity
   if (vs!=undefined) {
@@ -36,18 +38,21 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
     if (vs.typeMismatch   ) { return defaultMessages['typeMismatch'] }
     if (vs.valueMissing   ) { return defaultMessages['valueMissing'] }
 
-    if (stepRange!=undefined && ! isNaN(stepRange)) {
+    if (decimals!=undefined && ! isNaN(decimals)) {
       //
       // For custom steppable inputs
       //
-      if (countDecimals(stepRange)<countDecimals(value)) {
+      if (decimals<countDecimals(value)) {
         return defaultMessages['stepMismatch']
       }
-    } else if (input.step != undefined) {
+    } /*else if (input.step != undefined) {
       //
       // for non steppable inputs
       //
       if (vs.valid===false  ) { return defaultMessages['valid'] }
+    }*/
+    else {
+      if (vs.stepMismatch   ) { return defaultMessages['stepMismatch'] }
     }
   }
 
@@ -61,13 +66,13 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
     return defaultMessages['tooShort']
   }
   
-  if (input.step!=undefined && input.step!=='' && input.step!=='any') {
-    if (stepRange==undefined || isNaN(stepRange)) {
+  /*if (input.step!=undefined && input.step!=='' && input.step!=='any') {
+    if (decimals==undefined || isNaN(decimals)) {
       if (countDecimals(input.step)!=countDecimals(value)) {
         return defaultMessages['stepMismatch']
       }
     }
-  }
+  }*/
 
   // Some inputs like hidden and select, wont perform 
   // the standard required validation
@@ -94,8 +99,8 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   // Allowed values list
   if (allowedValues != undefined && value!=undefined && value!='') {
     const exists= allowedValues
-      .map((v) => parseForCompare(v))
-      .indexOf(parseForCompare(value)) >= 0
+      .map((v) => parseForCompare(inputType, v))
+      .indexOf(parseForCompare(inputType, value)) >= 0
     if (! exists) {
       return defaultMessages['customAllowList']
     }
@@ -104,8 +109,8 @@ const  checkValidity = (inputRef, value, parseForCompare, checkValue, allowedVal
   // Disallowed values list
   if (disallowedValues != undefined && value!=undefined && value!='') {
     const exists= disallowedValues
-      .map((v) => parseForCompare(v))
-      .indexOf(parseForCompare(value)) >= 0
+      .map((v) => parseForCompare(inputType, v))
+      .indexOf(parseForCompare(inputType, value)) >= 0
     if (exists) {
       return defaultMessages['customDisallowList']
     }

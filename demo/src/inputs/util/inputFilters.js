@@ -1,16 +1,41 @@
-const fltInteger = value => /^-?\d+$/.test(value)
+const _fltBase = (regex, required= false) => {
+  if (required) {
+    return (v) => regex.test(v)
+  }
+  return (v) => {
+    if (v===undefined || v==='') {
+      return true
+    }
+    return regex.test(v)
+  }
+}
 
-const fltUnsignedInteger = value => /^\d+$/.test(value)
+const REGEX_INT= /^-?\d+$/
+const REGEX_UINT= /^\d+$/
+const REGEX_FLOAT = /^-?\d*[.,]?\d*$/
+const REGEX_CURRENCY = /^-?\d*[.,]?\d{0,2}$/
+const REGEX_LATIN = /^[a-z ]*$/i
+const REGEX_HEXADECIMAL = /^[0-9a-f]*$/i
 
-const fltUnsignedIntegerLimited = value => /^\d+$/.test(value) && (value === "" || parseInt(value) <= 500)
+const fltInteger = _fltBase(REGEX_INT)
 
-const fltFloat = value => /^-?\d*[.,]?\d*$/.test(value)
+const fltUnsignedInteger = _fltBase(REGEX_UINT)
 
-const fltCurrency = value => /^-?\d*[.,]?\d{0,2}$/.test(value)
+const fltUnsignedIntegerLimited = (v) => {
+  if (! isNaN(v)) {
+    return parseInt(v) <= 500
+  }
+  const f= _fltBase(REGEX_UINT)
+  return f(v)
+}
 
-const fltLatin = value => /^[a-z ]*$/i.test(value)
+const fltFloat = _fltBase(REGEX_FLOAT)
 
-const fltHexadecimal = value => /^[0-9a-f]*$/i.test(value)
+const fltCurrency = _fltBase(REGEX_CURRENCY)
+
+const fltLatin = _fltBase(REGEX_LATIN)
+
+const fltHexadecimal = _fltBase(REGEX_HEXADECIMAL)
 
 
 export {fltInteger, fltUnsignedInteger, fltUnsignedIntegerLimited, 

@@ -11,7 +11,6 @@ VInput.propTypes = {
   render              : PropTypes.func.isRequired,
   formActions         : PropTypes.object , 
 
-  inputType           : PropTypes.string,
   prematureValidation : PropTypes.bool,
 
   feedback            : PropTypes.string,  
@@ -20,13 +19,13 @@ VInput.propTypes = {
   disallowedValues    : PropTypes.arrayOf(PropTypes.any),
   doRepeat            : PropTypes.string,
   doNotRepeat         : PropTypes.string,
-  stepRange           : PropTypes.number,
-  inputFilter         : PropTypes.func
+  decimals           : PropTypes.number,
+  inputFilter         : PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(RegExp), PropTypes.string])
 }
 
 
 VInput.defaultProps= {
-  inputType: 'text'
+  
 }
 
 export default VInput

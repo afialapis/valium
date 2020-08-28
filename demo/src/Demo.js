@@ -67,7 +67,7 @@ const Demo = () => {
       <header>
         <div>
           <h1>
-            <img className="logo" src="https://valium.afialapis.com/assets/images/logo/valium_name.png"></img>
+            <img className="logo" src="img/valium.png"></img>
             demo
           </h1>
         </div>        
@@ -105,6 +105,7 @@ const Demo = () => {
                        id={inputType.type}>
                     <h3>{inputType.type}</h3>
                       <inputType.comp formActions={formActions}
+                                      premature={premature}
                                       onLog={addLog}/>
                   </section>
                 )

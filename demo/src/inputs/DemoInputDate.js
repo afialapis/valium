@@ -27,7 +27,7 @@ const DemoInputDate = ({formActions, premature, onLog}) => {
           render = {({valid, message}, inputRef) => 
             <DemoInputGroup 
               label       = {"When will you take your next Valium?"}
-              description = ""
+              description = "Why would you wait till tomorrow"
               message     = {message}>
               <input ref          = {inputRef}
                      type         = "date"

@@ -21,7 +21,7 @@ const DemoInputColor = ({formActions, onLog}) => {
           render = {({valid, message}, inputRef) => 
             <DemoInputGroup 
               label       = {"What color has your world now?"}
-              description = ""
+              description = "Neither black nor white!"
               message     = {message}>
               <input ref         = {inputRef}
                      type        = "color"

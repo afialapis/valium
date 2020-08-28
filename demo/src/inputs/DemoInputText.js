@@ -1,15 +1,19 @@
 import React, {useState} from 'react'
 import {VInput} from '../../../src'
 import DemoInputGroup from './DemoInputGroup'
-import {fltLatin} from './util/inputFilters'
 
 const DemoInputText = ({formActions, premature, onLog}) => {
   const [name, setName]= useState('John Not Doe')
+  const [age, setAge]= useState('33') 
   const [words, _setWords]= useState('another dimension man!')
 
-  const handleNameChange = (nName) => {
+  const handleNameChange = (event) => {
+    const nName= event.target.value
+    const focused= event.target.ownerDocument.activeElement === event.target
     setName(nName)
-    onLog(`Welcome ${nName}!`)
+    if (! focused) {
+      onLog(`Welcome ${nName}!`)
+    }
   }
 
   return (
@@ -18,27 +22,49 @@ const DemoInputText = ({formActions, premature, onLog}) => {
         type                 = "text"
         disallowedValues     = {["John Doe"]}
         prematureValidation  = {premature}
-        inputFilter          = {fltLatin}
+        inputFilter          = {'latin'}
         formActions          = {formActions}
         render = {({valid, message}, inputRef) => 
           <DemoInputGroup 
             label       = {"Your name here"}
-            description = {"Controlled. Required. 'John Doe' is disallowed."}
+            description = {"Controlled. Required. 'John Doe' is disallowed. Latin chars."}
             message     = {message}>
             <input ref      = {inputRef}
                   name      = {'name'}
                   className = {valid ? 'valid' : 'invalid'}
                   required  = {true}
                   value     = {name}
-                  onChange  = {(ev) => handleNameChange(ev.target.value)}/>
+                  onChange  = {(ev) => handleNameChange(ev)}/>
           </DemoInputGroup>
         }
       />  
 
+
+      <VInput
+        type                 = "text"
+        checkValue           = {(v) => !isNaN(v) && parseInt(v)>=18}
+        prematureValidation  = {premature}
+        inputFilter          = {'int'}
+        formActions          = {formActions}
+        render = {({valid, message}, inputRef) => 
+          <DemoInputGroup 
+            label       = {"Your age here"}
+            description = {"Controlled. Required. Some >18 integer (through inputFilter)"}
+            message     = {message}>
+            <input ref      = {inputRef}
+                  name      = {'age'}
+                  className = {valid ? 'valid' : 'invalid'}
+                  required  = {true}
+                  value     = {age}
+                  onChange  = {(ev) => setAge(ev.target.value)}/>
+          </DemoInputGroup>
+        }
+      />   
+
       <VInput
         type                 = "text"
         prematureValidation  = {premature}
-        inputFilter          = {fltLatin}
+        inputFilter          = {'float'}
         formActions          = {formActions}
         render = {({valid, message}, inputRef) => 
           <DemoInputGroup 
@@ -52,7 +78,8 @@ const DemoInputText = ({formActions, premature, onLog}) => {
                   defaultValue = {words}/>
           </DemoInputGroup>
         }
-      />          
+      />  
+            
     </>
   )
 }
