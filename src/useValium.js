@@ -1,41 +1,23 @@
-import {useState, useEffect, useRef, useCallback} from 'react'
-
-import checkValidity from './validity/checkValidity'
-import getInputValue from './validity/getInputValue'
-import {makeInputFilter} from './validity/inputFilters'
-
-// Check some props consistency
-const checkProps = (name, inputType, doRepeat, doNotRepeat, inputFilter, prematureValidation) => {
-  // Check prematureValidation
-  if (prematureValidation && ['text', 'number', 'color'].indexOf(inputType)<0) {
-    console.warn(`Valium: You passed prematureValidation=true to the Input Element (${name}) of type (${inputType}), but it does not support it`)
-  }
-  // Check inputFilter
-  if (inputFilter && ['text'].indexOf(inputType)<0) {
-    console.warn(`Valium: You passed inputFilter to the Input Element (${name}) of type (${inputType}), but it does not support it`)
-  }        
-  // Check doRepeat
-  if (doRepeat!=undefined && doRepeat==name) {
-    console.warn(`Valium: You passed doRepeat prop to the Input Element (${name}) with the same name`)
-  }
-  // Check doNotRepeat
-  if (doNotRepeat!=undefined && doNotRepeat==name) {
-    console.warn(`Valium: You passed doNotRepeat prop to the Input Element (${name}) with the same name`)
-  }
-}
+import {useEffect, useRef} from 'react'
+import {log} from './helpers/log'
+import {makeInputFilter} from './helpers/inputFilters'
+import getEventTypes from './config/getEventTypes'
+import { useValidity } from './validity/useValidity'
+import {checkProps} from './checkers/checkProps'
 
 const useValium = (props) => {
 
-  const {formActions, checkValue, 
+  const {checkValue, 
          allowedValues, disallowedValues, 
          doRepeat, doNotRepeat, decimals, 
          inputFilter, prematureValidation, 
          feedback, bindSetValidity}= props
 
-  const [valid, setValid]= useState(true)
-  const [message, setMessage]= useState('')
-  
   const inputRef = useRef(undefined)
+
+  const [valid, message, setValidity] = 
+    useValidity(inputRef, checkValue, allowedValues, disallowedValues, 
+                doRepeat, doNotRepeat, decimals, feedback)
 
   //
   // Specific effect to check props consistency. Just DEV time
@@ -43,53 +25,17 @@ const useValium = (props) => {
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") {
       if (inputRef!=undefined && inputRef.current!=undefined) {
-        
         const input= inputRef.current
-        checkProps(input.name, input.type.toLowerCase(), doRepeat, doNotRepeat, inputFilter, prematureValidation)
+
+        log('input', `${input.name} (${input.type}) running checkprops effect on useValium  -- ${JSON.stringify([doRepeat, doNotRepeat, inputFilter, prematureValidation])}`)
+
+        checkProps(input, doRepeat, doNotRepeat, inputFilter, prematureValidation)
       }
     }
   }, 
   // We subscribe specific props to avoid re-runnings:
   // - passing `props' would re-run each render
-  // - notice also `formActions` would run twice at mount
   [doRepeat, doNotRepeat, inputFilter, prematureValidation])
-
-
-  //
-  // Callback for check and set input validity
-  //
-  const setValidity= useCallback(() => {
-    if (inputRef!=undefined && inputRef.current!=undefined) {
-      const input= inputRef.current
-
-      // Clear previous custom error
-      input.setCustomValidity('')
-      input.setAttribute('data-valium-validity', '')  
-
-      // Check validity
-      const value = getInputValue(input)
-      const validity= checkValidity(inputRef, value,
-                                    checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, decimals)
-      const message= validity==''
-                    ? ''
-                    : feedback || validity
-
-      // Set it
-      //input.removeAttribute('readonly')
-      input.setCustomValidity(message)
-      input.setAttribute('data-valium-validity', message) 
-
-      // Update state
-      setValid(message==='')
-      setMessage(message)
-
-      // Update form
-      if (formActions && formActions.formUpdate!=undefined) {
-        formActions.formUpdate(input, message, value)
-      }      
-    }}, 
-    [checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, decimals, feedback, formActions]
-  )
 
 
   useEffect(() => {
@@ -98,6 +44,8 @@ const useValium = (props) => {
       const input= inputRef.current
       const name= input.name
       const inputType= input.type.toLowerCase()
+
+      log('input', `${input.name} (${input.type}) running validity effect on useValium - ${JSON.stringify([prematureValidation, bindSetValidity, inputFilter, setValidity])}`)
       
       // Ensure checkbox checked prop
       if (inputType === 'checkbox') {
@@ -122,48 +70,37 @@ const useValium = (props) => {
         }           
       }
 
-      const handleChange = (_event) => {
+      const handleChange = (event) => {
+        log('input', `${input.name} (${input.type}) event ${event.type} is calling setValidity`)
         setValidity()
       }
 
       // Handle listeners
       const allListeners= {}
 
-      // Add premature listeners, if any
-      let prematureEvents= []
-      if (prematureValidation) {
-        //
-        // Catching 'input' event will not work
-        // on Controlled components. The event gets fired
-        // and handled correctly (at least it seems so),
-        // but the input gets never updated.
-        // React seems to be doing something hacky about it.
-        // TODO Investigate why
-        //
-        prematureEvents= inputType=='color'
-                         ? ['change']
-                         : ['keyup', 'paste'] // 'input'
-        prematureEvents.map((eventType) => {
-          const prematureListener= (event) => {
-            handleChange(event)      
-          }
-          input.addEventListener(eventType, prematureListener)
-          allListeners[eventType]= prematureListener
-        })    
-      }
-
       // Add change listener
       const changeListener= (event) => {
         handleChange(event)
       }
 
-      const changeEvent= ['checkbox', 'select', 'select-multiple'].indexOf(inputType)>=0
-                         ? 'click'
-                         : 'change'
+      const changeEvent= getEventTypes(inputType, 'change')[0]
+      input.addEventListener(changeEvent, changeListener)
+      allListeners[changeEvent]= changeListener
 
-      if (prematureEvents.indexOf(changeEvent)<0) {
-        input.addEventListener(changeEvent, changeListener)
-        allListeners[changeEvent]= changeListener
+
+      // Add premature listeners, if any
+      if (prematureValidation) {
+        let prematureEvents= []
+        prematureEvents= getEventTypes(inputType, 'premature')
+        prematureEvents
+          .filter((eventType) => eventType != changeEvent)
+          .map((eventType) => {
+            const prematureListener= (event) => {
+              handleChange(event)      
+            }
+            input.addEventListener(eventType, prematureListener)
+            allListeners[eventType]= prematureListener
+          })    
       }
 
       // Input Filter listeners
@@ -220,9 +157,10 @@ const useValium = (props) => {
       }
       return clean
     }
-  }, [prematureValidation, bindSetValidity, inputFilter, setValidity])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [prematureValidation, bindSetValidity, inputFilter /*, setValidity*/])
 
-  return [inputRef, {valid, message}]
+  return [inputRef, valid, message]
 }
 
 

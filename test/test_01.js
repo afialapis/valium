@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import co from "co"
 import ES6Promise from 'es6-promise'
 import assert from 'assert'
-import {VForm} from '../src/index'
+import {useForm} from '../src/index'
 
 
 ES6Promise.polyfill()
@@ -26,12 +26,15 @@ describe('Valium', function() {
   it("should render an empty form.", co.wrap(function *(){
     const fid= 'valium_empty_form'
     const App = () => {
+      const [formRef, valid, readElements] = useForm()
+
       return (
         <div>
-          <VForm id           = {fid}
-                 renderButtons= {() => <div/>}
-                 renderInputs={(_fUpd) => <div/>}>
-          </VForm>
+          <form ref = {formRef}
+                id  = {fid}
+                className= 'valium-form'>
+            <div/>
+          </form>
         </div>
       )
     }
@@ -41,12 +44,14 @@ describe('Valium', function() {
     })
     
     const emptyFormElement = document.getElementById(fid)
-    assert.notEqual(emptyFormElement.getAttribute('class').indexOf('valium-form'), -1)
+    assert.ok(emptyFormElement.classList.contains('valium-form'))
     ReactDOM.unmountComponentAtNode(container)
   }))  
   
   it("should render custom form buttons.", co.wrap(function *(){
     const App = () => {
+      const [formRef, valid, readElements] = useForm()
+
       const renderButtons= (_valid, _elements) => {
         return (
           <>
@@ -58,9 +63,10 @@ describe('Valium', function() {
 
       return (
         <div>
-          <VForm renderButtons= {(params) => renderButtons(params)}
-                 renderInputs={(_fUpd) => <div/>}>
-          </VForm>
+          <form ref = {formRef}>
+            <button id="test-btn-cancel">Cancel</button>
+            <button id="test-btn-save">Save</button>
+          </form>
         </div>
       )
     }
@@ -70,10 +76,10 @@ describe('Valium', function() {
     })
     
     const btnCancelElement = document.getElementById("test-btn-cancel")
-    assert.equal(btnCancelElement.innerHTML, 'Cancel')
+    assert.strictEqual(btnCancelElement.innerHTML, 'Cancel')
 
     const btnSaveElement = document.getElementById("test-btn-save")
-    assert.equal(btnSaveElement.innerHTML, 'Save')
+    assert.strictEqual(btnSaveElement.innerHTML, 'Save')
     
     ReactDOM.unmountComponentAtNode(container)
   }))  

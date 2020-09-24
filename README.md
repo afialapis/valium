@@ -79,7 +79,7 @@ const MyValidatedForm = () => {
               disallowedValues     = {["NO"]}
               /* prematureValidation will not wait input to lose focus */
               prematureValidation  = {true}
-              render = {({valid, message}, inputRef) => 
+              render = {(valid, message, inputRef) => 
                 <div>
                   <input ref       = {inputRef}
                          name      = 'myText'

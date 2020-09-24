@@ -1,8 +1,13 @@
 import React, {useState} from 'react'
-import {VInput} from '../../../src'
+import {useValium} from '../../../src'
 import DemoInputGroup from './DemoInputGroup'
 
-const DemoInputCheckbox = ({formActions, onLog}) => {
+const DemoInputCheckbox = ({onLog}) => {
+
+  const [inputRef, valid, message] = useValium({
+    type: 'checkbox',
+    disallowedValues: [true]
+  })
 
   const [effects, setEffects]= useState(false)
 
@@ -11,25 +16,18 @@ const DemoInputCheckbox = ({formActions, onLog}) => {
   }
 
   return (
-      <VInput
-          type             = "checkbox"
-          disallowedValues = {[true]}
-          formActions      = {formActions}
-          render  ={({valid, message}, inputRef) => 
-            <DemoInputGroup 
-              label       = {"Did you notice side effects?"}
-              description = ""
-              message     = {message}>
-              <input ref       = {inputRef}
-                     type      = "checkbox"
-                     name      = {'effects'}
-                     className = {valid ? 'valid' : 'invalid'}
-                     value     = {effects}
-                     onChange  = {(ev) => handleEffectsChange(ev.target.checked)}>
-              </input>                
-            </DemoInputGroup>   
-          }
-      />       
+    <DemoInputGroup 
+      label       = {"Did you notice side effects?"}
+      description = ""
+      message     = {message}>
+      <input ref       = {inputRef}
+             type      = "checkbox"
+             name      = {'effects'}
+             className = {valid ? 'valid' : 'invalid'}
+             value     = {effects}
+             onChange  = {(ev) => handleEffectsChange(ev.target.checked)}>
+      </input>                
+    </DemoInputGroup>
   )
 }
 

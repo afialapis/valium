@@ -1,5 +1,5 @@
 import defaultMessages from './messages'
-import parseForCompare from './compare'
+import parseForCompare from '../helpers/compare'
 
 const countDecimals = (f) => {
   try {

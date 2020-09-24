@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {VForm} from '../../src'
+import React, {useState, useEffect} from 'react'
+import {useForm} from '../../src'
 import DemoInputCheckbox from './inputs/DemoInputCheckbox'
 import DemoInputColor from './inputs/DemoInputColor'
 import DemoInputDate from './inputs/DemoInputDate'
@@ -24,6 +24,7 @@ const INPUT_TYPES= [
 
 
 const Demo = () => {
+  const [formRef, valid, readElements] = useForm()
   const [premature, setPremature]= useState(true)
   const [showInputType, setShowInputType]= useState('text')
 
@@ -45,11 +46,11 @@ const Demo = () => {
     setLog(nLog)
   }
 
-  const handleSubmit = (valid, elements) => {
+  const handleSubmit = (valid, felements) => {
     const nLog= [...log]
     nLog.push({msg: 'Validating inputs:'})
 
-
+    const elements= felements()
     Object.keys(elements)
       .map((name) => {
         const el= elements[name]
@@ -89,28 +90,27 @@ const Demo = () => {
       <main>
 
         <div className="valium-example">
-          <VForm 
-            renderButtons= {(valid, elements) => {
-              return (
-                <section className="centered">
-                  <a className="btn btn-primary"
-                          onClick={(_ev) => handleSubmit(valid, elements)}>Validate</a>
-                </section>      
-              )
-            }}
 
-            renderInputs= {(formActions) => {
-                const inputs= INPUT_TYPES.map((inputType) => 
-                  <section key={`section_${inputType.type}`}
-                       id={inputType.type}>
-                    <h3>{inputType.type}</h3>
-                      <inputType.comp formActions={formActions}
-                                      premature={premature}
-                                      onLog={addLog}/>
-                  </section>
-                )
-                return inputs
-            }}/>
+          <form ref = {formRef}>
+
+              
+            {INPUT_TYPES.map((inputType) => 
+                <section key={`section_${inputType.type}`}
+                      id={inputType.type}>
+                  <h3>{inputType.type}</h3>
+                    <inputType.comp premature={premature}
+                                    onLog={addLog}/>
+                </section>
+              )
+            }
+
+            <section className="centered">
+              <a className="btn btn-primary"
+                      onClick={(_ev) => handleSubmit(valid, readElements)}>
+                        {valid ? 'Submit' : 'Invalid yet'}
+                      </a>
+            </section>                 
+          </form>
         </div>
 
       </main>
