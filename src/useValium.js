@@ -11,7 +11,7 @@ const useValium = (props) => {
          allowedValues, disallowedValues, 
          doRepeat, doNotRepeat, decimals, 
          inputFilter, prematureValidation, 
-         feedback, bindSetValidity}= props
+         feedback}= props
 
   const inputRef = useRef(undefined)
 
@@ -45,7 +45,7 @@ const useValium = (props) => {
       const name= input.name
       const inputType= input.type.toLowerCase()
 
-      log('input', `${input.name} (${input.type}) running validity effect on useValium - ${JSON.stringify([prematureValidation, bindSetValidity, inputFilter, setValidity])}`)
+      log('input', `${input.name} (${input.type}) running validity effect on useValium - ${JSON.stringify([prematureValidation, inputFilter, setValidity])}`)
       
       // Ensure checkbox checked prop
       if (inputType === 'checkbox') {
@@ -56,19 +56,6 @@ const useValium = (props) => {
 
       // Set initial validity
       setValidity()
-
-      // Special prop `bindSetValidity`
-      // Used to propagate the `setValidity()` method 
-      // and launch it on higher scopes
-      if (bindSetValidity!=undefined) {
-        bindSetValidity(() => setValidity())
-      }
-
-      const cleanBindSetValidity = () => {
-        if (bindSetValidity!=undefined) {
-          bindSetValidity(() => {})
-        }           
-      }
 
       const handleChange = (event) => {
         log('input', `${input.name} (${input.type}) event ${event.type} is calling setValidity`)
@@ -151,16 +138,12 @@ const useValium = (props) => {
       }    
       
       // return clean function
-      const clean = () => {
-        cleanBindSetValidity()
-        removeAllChangeListeners()
-      }
-      return clean
+      return removeAllChangeListeners
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [prematureValidation, bindSetValidity, inputFilter /*, setValidity*/])
+  }, [prematureValidation, inputFilter /*, setValidity*/])
 
-  return [inputRef, valid, message]
+  return [inputRef, valid, message, setValidity]
 }
 
 

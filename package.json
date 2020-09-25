@@ -1,6 +1,6 @@
 {
   "name": "valium",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "A Form validator for React, using and customizing HTML5 Constraint Validation API",
   "author": "Donato Lorenzo <donato@afialapis.com>",
   "contributors": [
@@ -70,6 +70,7 @@
     "karma-mocha": "^2.0.1",
     "karma-sourcemap-loader": "^0.3.7",
     "mocha": "^8.1.1",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.23.1",

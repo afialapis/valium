@@ -18,7 +18,7 @@ const DemoInputSelectMultiple = ({onLog}) => {
 
   const [times, setTimes]= useState(['3', '5', '7'])
 
-  const [inputRef, valid, message] = useValium({
+  const [inputRef, valid, message, _setValidity] = useValium({
     type: 'select-multiple',
     disallowedValues: [['1', '3', '5', '7']]
   })

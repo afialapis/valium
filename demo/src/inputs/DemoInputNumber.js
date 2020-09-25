@@ -8,18 +8,18 @@ const DemoInputNumber = ({premature, onLog}) => {
   const [weight, setWeight]= useState(105.876)
   const [size, setSize]= useState(1.44)
 
-  const [pillsRef, pillsValid, pillsMessage] = useValium({
+  const [pillsRef, pillsValid, pillsMessage, _setPillsValidity] = useValium({
     decimals: 1,
     checkValue: (v) => v>=6,
     prematureValidation: premature,
   })
 
-  const [weightRef, weightValid, weightMessage] = useValium({
+  const [weightRef, weightValid, weightMessage, _setWightValidity] = useValium({
     decimals: 3,
     prematureValidation: premature,
   })
   
-  const [sizeRef, sizeValid, sizeMessage] = useValium({
+  const [sizeRef, sizeValid, sizeMessage, _setSizeValidity] = useValium({
     prematureValidation: premature,
   })  
 

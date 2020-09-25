@@ -13,7 +13,7 @@ const LIST_OPTIONS= {
 const DemoInputSelect = ({onLog}) => {
   const [experience, setExperience]= useState('1')
 
-  const [inputRef, valid, message] = useValium({
+  const [inputRef, valid, message, _setValidity] = useValium({
     type: 'select',
     disallowedValues: ['3', '4']
   })

@@ -5,7 +5,7 @@ import DemoInputGroup from './DemoInputGroup'
 const DemoInputTextArea = ({premature, onLog}) => {
   const [story, setStory]= useState('It started a warm Friday\'s night. I was bored...')
 
-  const [inputRef, valid, message] = useValium({
+  const [inputRef, valid, message, _setValidity] = useValium({
     type: 'textarea',
     prematureValidation: premature
   })

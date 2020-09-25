@@ -4,7 +4,7 @@ import DemoInputGroup from './DemoInputGroup'
 
 const DemoInputFile = ({onLog}) => {
 
-  const [inputRef, valid, message] = useValium({
+  const [inputRef, valid, message, _setValidity] = useValium({
     type: 'file'
   })
 

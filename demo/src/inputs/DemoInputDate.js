@@ -12,7 +12,7 @@ const getToday = (add= 0) => {
 
 const DemoInputDate = ({premature, onLog}) => {
 
-  const [inputRef, valid, message] = useValium({
+  const [inputRef, valid, message, _setValidity] = useValium({
     type: 'text',
     disallowedValues: [getToday()],
     prematureValidation: premature
