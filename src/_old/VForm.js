@@ -2,11 +2,11 @@ import React, {useState, useRef, useEffect, useCallback} from 'react'
 import PropTypes from 'prop-types'
 /*import getEventTypes from './validity/getEventTypes'
 import Demo from '../demo/src/Demo'
-import useValium from './useValium'*/
+import useValiumInput from './useValiumInput'*/
 
 /*
 COMPROBAR QUE AHORA SI SE EVITAN RENDERS DE TODOS LOS INPUTS EN CADA RERENDER
-IGUALMENTE, E EL Demo, HAY INPUUTS QUE AL VALIDAR LLAMN a useValium.-form-change mas de una vez,
+IGUALMENTE, E EL Demo, HAY INPUUTS QUE AL VALIDAR LLAMN a useValiumInput.-form-change mas de una vez,
 incluso al de otros inputs... pero otros van bbien... WHY????
 */
 

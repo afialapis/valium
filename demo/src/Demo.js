@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useForm} from '../../src'
+import {useValiumForm} from '../../src'
 import DemoInputCheckbox from './inputs/DemoInputCheckbox'
 import DemoInputColor from './inputs/DemoInputColor'
 import DemoInputDate from './inputs/DemoInputDate'
@@ -24,7 +24,7 @@ const INPUT_TYPES= [
 
 
 const Demo = () => {
-  const [formRef, valid, readElements] = useForm()
+  const [formRef, valid, readElements] = useValiumForm()
   const [premature, setPremature]= useState(true)
   const [showInputType, setShowInputType]= useState('text')
 

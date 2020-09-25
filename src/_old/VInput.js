@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
-import useValium from '../useValium'
+import useValiumInput from '../useValiumInput'
 
 const VInput = (props) => {
-  const [inputRef, valid, message]= useValium(props)
+  const [inputRef, valid, message]= useValiumInput(props)
   return props.render(valid, message, inputRef)
 }
 

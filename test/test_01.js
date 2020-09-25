@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import co from "co"
 import ES6Promise from 'es6-promise'
 import assert from 'assert'
-import {useForm} from '../src/index'
+import {useValiumForm} from '../src/index'
 
 
 ES6Promise.polyfill()
@@ -26,7 +26,7 @@ describe('Valium', function() {
   it("should render an empty form.", co.wrap(function *(){
     const fid= 'valium_empty_form'
     const App = () => {
-      const [formRef, valid, readElements] = useForm()
+      const [formRef, valid, readElements] = useValiumForm()
 
       return (
         <div>
@@ -50,7 +50,7 @@ describe('Valium', function() {
   
   it("should render custom form buttons.", co.wrap(function *(){
     const App = () => {
-      const [formRef, valid, readElements] = useForm()
+      const [formRef, valid, readElements] = useValiumForm()
 
       const renderButtons= (_valid, _elements) => {
         return (

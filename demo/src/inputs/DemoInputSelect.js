@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useValium} from '../../../src'
+import {useValiumInput} from '../../../src'
 import DemoInputGroup from './DemoInputGroup'
 
 const LIST_OPTIONS= {
@@ -13,7 +13,7 @@ const LIST_OPTIONS= {
 const DemoInputSelect = ({onLog}) => {
   const [experience, setExperience]= useState('1')
 
-  const [inputRef, valid, message, _setValidity] = useValium({
+  const [inputRef, valid, message, _setValidity] = useValiumInput({
     type: 'select',
     disallowedValues: ['3', '4']
   })

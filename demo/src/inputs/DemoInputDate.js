@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useValium} from '../../../src'
+import {useValiumInput} from '../../../src'
 import DemoInputGroup from './DemoInputGroup'
 
 const pad = (n) => 
@@ -12,7 +12,7 @@ const getToday = (add= 0) => {
 
 const DemoInputDate = ({premature, onLog}) => {
 
-  const [inputRef, valid, message, _setValidity] = useValium({
+  const [inputRef, valid, message, _setValidity] = useValiumInput({
     type: 'text',
     disallowedValues: [getToday()],
     prematureValidation: premature

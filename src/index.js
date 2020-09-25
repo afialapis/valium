@@ -1,4 +1,4 @@
-import useForm        from './useForm'
-import useValium      from './useValium'
+import useValiumForm        from './useValiumForm'
+import useValiumInput      from './useValiumInput'
 
-export {useForm, useValium}
+export {useValiumForm, useValiumInput}
