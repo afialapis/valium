@@ -14,9 +14,11 @@ export default {
     format: 'umd',
     name: 'Valium',
     globals: {
-      react: 'React',
+      'react': 'React',
+      'react-dom': 'ReactDOM',
       'prop-types': 'PropTypes',
-      'prop-types/checkPropTypes': 'checkPropTypes'
+      /*'prop-types/checkPropTypes': 'checkPropTypes',
+      'es6-promise': 'ES6Promise'  */    
     }   
   },
   plugins: [
@@ -26,15 +28,17 @@ export default {
     babel({
       exclude: 'node_modules/**',
       /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
-      babelHelpers: 'runtime'
+      babelHelpers: 'bundled'
     }),
-    //external([/@babel\/runtime/, 'react', 'prop-types', 'prop-types/checkPropTypes']),
-    resolve({
+    //external([/@babel\/runtime/, 'react', 'react-dom', 'prop-types', 'prop-types/checkPropTypes']),
+    resolve(/*{
       browser: true,
       preferBuiltins: false
-    }),
+    }*/),
     commonjs(/*{
-      esmExternals: ['es6-promise']
+      esmExternals: ['es6-promise'],
+      include: 'node_modules/**'
+
     }*/),
     nodePolyfills()
   ]

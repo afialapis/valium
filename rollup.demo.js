@@ -15,7 +15,8 @@ export default {
     format: 'umd',
     name: 'Valium',
     globals: {
-      react: 'React',
+      'react': 'React',
+      'react-dom': 'ReactDOM',
       'prop-types': 'PropTypes'
     }
   },
@@ -26,7 +27,7 @@ export default {
     babel({
       exclude: 'node_modules/**',
       /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
-      babelHelpers: 'runtime'
+      babelHelpers: 'bundled'
     }),
     resolve(),
     //external(['react', 'prop-types']),
