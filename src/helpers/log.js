@@ -1,4 +1,4 @@
-const LOG_ENABLED= true
+const LOG_ENABLED= false
 
 const log = (w, s) => {
   if (! LOG_ENABLED) {

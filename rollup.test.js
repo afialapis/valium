@@ -15,9 +15,7 @@ export default {
     globals: {
       'react': 'React',
       'react-dom': 'ReactDOM',
-      'prop-types': 'PropTypes',
-      /*'prop-types/checkPropTypes': 'checkPropTypes',
-      'es6-promise': 'ES6Promise'  */    
+      /*'es6-promise': 'ES6Promise'  */    
     }   
   },
   plugins: [

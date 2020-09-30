@@ -2,7 +2,6 @@ import babel from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import resolve from '@rollup/plugin-node-resolve'
-import external from 'rollup-plugin-peer-deps-external'
 import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
@@ -16,22 +15,20 @@ export default {
     name: 'Valium',
     globals: {
       'react': 'React',
-      'react-dom': 'ReactDOM',
-      'prop-types': 'PropTypes',
-      'prop-types/checkPropTypes': 'checkPropTypes'
+      'react-dom': 'ReactDOM'
     }
   },
+  external: ['react', 'react-dom'],
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV)
-    }),    
+    }),
     babel({
       exclude: 'node_modules/**',
       /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
       babelHelpers: 'bundled'
     }),
     resolve(),
-    external(['react', 'react-dom', 'prop-types', 'prop-types/checkPropTypes']),
     commonjs(),
     scss(),
     serve({
