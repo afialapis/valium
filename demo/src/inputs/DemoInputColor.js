@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputColor = ({premature, onLog}) => {
 
@@ -33,4 +33,4 @@ const DemoInputColor = ({premature, onLog}) => {
   )
 }
 
-export default DemoInputColor
+export {DemoInputColor}

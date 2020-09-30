@@ -1,7 +1,7 @@
 import {useEffect, useRef} from 'react'
 import {log} from './helpers/log'
 import {makeInputFilter} from './helpers/inputFilters'
-import getEventTypes from './config/getEventTypes'
+import {getEventTypes} from './config/getEventTypes'
 import { useValidity } from './validity/useValidity'
 import {checkProps} from './checkers/checkProps'
 
@@ -147,4 +147,4 @@ const useValiumInput = (props) => {
 }
 
 
-export default useValiumInput
+export {useValiumInput}

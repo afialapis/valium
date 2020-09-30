@@ -23,7 +23,7 @@ const DemoInputGroup = ({children, label, message, description}) => {
   )
 }
 
-export default DemoInputGroup
+export {DemoInputGroup}
 
 
 

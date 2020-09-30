@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import {useValiumForm} from '../../src'
-import DemoInputCheckbox from './inputs/DemoInputCheckbox'
-import DemoInputColor from './inputs/DemoInputColor'
-import DemoInputDate from './inputs/DemoInputDate'
-import DemoInputFile from './inputs/DemoInputFile'
-import DemoInputNumber from './inputs/DemoInputNumber'
-import DemoInputSelect from './inputs/DemoInputSelect'
-import DemoInputSelectMultiple from './inputs/DemoInputSelectMultiple'
-import DemoInputTextArea from './inputs/DemoInputTextArea'
-import DemoInputText from './inputs/DemoInputText'
+import {DemoInputCheckbox} from './inputs/DemoInputCheckbox'
+import {DemoInputColor} from './inputs/DemoInputColor'
+import {DemoInputDate} from './inputs/DemoInputDate'
+import {DemoInputFile} from './inputs/DemoInputFile'
+import {DemoInputNumber} from './inputs/DemoInputNumber'
+import {DemoInputSelect} from './inputs/DemoInputSelect'
+import {DemoInputSelectMultiple} from './inputs/DemoInputSelectMultiple'
+import {DemoInputTextArea} from './inputs/DemoInputTextArea'
+import {DemoInputText} from './inputs/DemoInputText'
 
 const INPUT_TYPES= [
   {type: 'text', comp: DemoInputText},
@@ -142,4 +142,4 @@ const Demo = () => {
   )
 }
 
-export default Demo
+export {Demo}

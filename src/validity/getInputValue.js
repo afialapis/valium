@@ -30,4 +30,4 @@ const getInputValue = (input) => {
   return input.value
 }
 
-export default getInputValue
+export {getInputValue}

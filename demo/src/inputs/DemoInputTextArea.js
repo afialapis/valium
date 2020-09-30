@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputTextArea = ({premature, onLog}) => {
   const [story, setStory]= useState('It started a warm Friday\'s night. I was bored...')
@@ -30,4 +30,4 @@ const DemoInputTextArea = ({premature, onLog}) => {
   )
 }
 
-export default DemoInputTextArea
+export {DemoInputTextArea}

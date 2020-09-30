@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const pad = (n) => 
   n.toString().padStart(2, '0')
@@ -39,4 +39,4 @@ const DemoInputDate = ({premature, onLog}) => {
   )
 }
 
-export default DemoInputDate
+export {DemoInputDate}

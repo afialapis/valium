@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputText = ({premature, onLog}) => {
   const [name, setName]= useState('John Not Doe')
@@ -76,4 +76,4 @@ const DemoInputText = ({premature, onLog}) => {
   )
 }
 
-export default DemoInputText
+export {DemoInputText}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputNumber = ({premature, onLog}) => {
 
@@ -85,4 +85,4 @@ const DemoInputNumber = ({premature, onLog}) => {
   )
 }
 
-export default DemoInputNumber
+export {DemoInputNumber}

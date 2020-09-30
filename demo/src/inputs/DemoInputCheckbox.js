@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputCheckbox = ({onLog}) => {
 
@@ -31,4 +31,4 @@ const DemoInputCheckbox = ({onLog}) => {
   )
 }
 
-export default DemoInputCheckbox
+export {DemoInputCheckbox}

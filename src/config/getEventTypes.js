@@ -23,4 +23,4 @@ const getEventTypes = (inputType, where) => {
   return []
 }
 
-export default getEventTypes
+export {getEventTypes}

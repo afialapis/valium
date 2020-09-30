@@ -1,4 +1,4 @@
-export default {
+const defaultMessages = {
   badInput        : 'Value is wrong',
   customError     : 'Value does not match custom validity',
   patternMismatch : 'Value does not match expected pattern',
@@ -16,3 +16,5 @@ export default {
   customDoRepeat     : 'Value must be repeated',
   customDoNotRepeat  : 'Value cannot be repeated'
 }
+
+export {defaultMessages}

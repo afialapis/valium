@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const LIST_OPTIONS= {
   '1': "It's fascinating",
@@ -46,4 +46,4 @@ const DemoInputSelect = ({onLog}) => {
   )
 }
 
-export default DemoInputSelect
+export {DemoInputSelect}

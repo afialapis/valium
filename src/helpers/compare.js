@@ -144,4 +144,4 @@ const parseForCompare = (inputType, value) => {
           : value.toString()
 }
 
-export default parseForCompare
+export {parseForCompare}

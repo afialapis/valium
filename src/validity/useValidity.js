@@ -1,7 +1,7 @@
 import {useState, useCallback} from 'react'
 import {log} from '../helpers/log'
-import checkValidity from './checkValidity'
-import getInputValue from './getInputValue'
+import {checkValidity} from './checkValidity'
+import {getInputValue} from './getInputValue'
 
 
 const useValidity = (inputRef, checkValue, allowedValues, disallowedValues, 

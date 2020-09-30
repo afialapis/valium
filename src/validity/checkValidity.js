@@ -1,5 +1,5 @@
-import defaultMessages from './messages'
-import parseForCompare from '../helpers/compare'
+import {defaultMessages} from './messages'
+import {parseForCompare} from '../helpers/compare'
 
 const countDecimals = (f) => {
   try {
@@ -147,4 +147,4 @@ const  checkValidity = (inputRef, value, checkValue, allowedValues, disallowedVa
   return ''
 }  
 
-export default checkValidity
+export {checkValidity}

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const LISTM_OPTIONS= {
   '1': "08:00",
@@ -55,4 +55,4 @@ const DemoInputSelectMultiple = ({onLog}) => {
   )
 }
 
-export default DemoInputSelectMultiple
+export {DemoInputSelectMultiple}

@@ -108,5 +108,5 @@ const useValiumForm = () => {
   return [formRef, valid, readElements]
 }
 
-export default useValiumForm
+export {useValiumForm}
 

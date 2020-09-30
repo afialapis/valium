@@ -1,6 +1,6 @@
 import React from 'react'
 import {useValiumInput} from '../../../src'
-import DemoInputGroup from './DemoInputGroup'
+import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputFile = ({onLog}) => {
 
@@ -24,4 +24,4 @@ const DemoInputFile = ({onLog}) => {
   )
 }
 
-export default DemoInputFile
+export {DemoInputFile}
