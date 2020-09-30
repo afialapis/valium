@@ -3,8 +3,5 @@
     ["@babel/preset-env", {"targets": {"esmodules": true}}],
     "@babel/preset-react"
   ],
-  "plugins": [
-    // Stage 3
-    "@babel/plugin-proposal-object-rest-spread"
-  ]
+  "plugins": []
 }
