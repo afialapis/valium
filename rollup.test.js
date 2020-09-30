@@ -1,5 +1,4 @@
 import babel from '@rollup/plugin-babel'
-//import external from 'rollup-plugin-peer-deps-external'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
@@ -30,7 +29,6 @@ export default {
       /*https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers*/
       babelHelpers: 'bundled'
     }),
-    //external([/@babel\/runtime/, 'react', 'react-dom', 'prop-types', 'prop-types/checkPropTypes']),
     resolve(/*{
       browser: true,
       preferBuiltins: false

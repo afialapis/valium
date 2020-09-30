@@ -2,7 +2,7 @@ import babel from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import resolve from '@rollup/plugin-node-resolve'
-//import external from 'rollup-plugin-peer-deps-external'
+import external from 'rollup-plugin-peer-deps-external'
 import scss from 'rollup-plugin-postcss'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
@@ -17,7 +17,8 @@ export default {
     globals: {
       'react': 'React',
       'react-dom': 'ReactDOM',
-      'prop-types': 'PropTypes'
+      'prop-types': 'PropTypes',
+      'prop-types/checkPropTypes': 'checkPropTypes'
     }
   },
   plugins: [
@@ -30,8 +31,7 @@ export default {
       babelHelpers: 'bundled'
     }),
     resolve(),
-    //external(['react', 'prop-types']),
-    //external([/@babel\/runtime/, 'react', 'prop-types']),    
+    external(['react', 'react-dom', 'prop-types', 'prop-types/checkPropTypes']),
     commonjs(),
     scss(),
     serve({
