@@ -48,11 +48,11 @@ module.exports = [
   // CommonJs
   //
   baseCfg({
-    file: packageJSON.main,
+    file: packageJSON.cjs,
     format: 'cjs'
   }, false, false),
   baseCfg({
-    file: minifyExtension(packageJSON.main),
+    file: minifyExtension(packageJSON.cjs),
     format: 'cjs'
   }, false, true),
   //
