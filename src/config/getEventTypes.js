@@ -1,7 +1,7 @@
 const getEventTypes = (inputType, where) => {
 
   if (where == 'change') {
-    return ['checkbox', 'select-one', 'select-multiple'].indexOf(inputType)>=0
+    return ['checkbox', /*'select-one',*/ 'select-multiple'].indexOf(inputType)>=0
             ? ['click']
             : ['change']
   }

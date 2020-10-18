@@ -2,13 +2,12 @@ import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
-const DemoInputColor = ({premature, onLog}) => {
+const DemoInputColor = () => {
 
-  const [inputRef, valid, message, _setValidity] = useValiumInput({
+  const [inputRef, valid, message] = useValiumInput({
     type: 'color',
     disallowedValues: ['#000000', '#FFFFFF', '#ffffff'],
-    feedback: 'Neither black nor white',
-    prematureValidation: premature
+    feedback: 'Neither black nor white'
   })
 
   const [color, setColor]= useState('#FF00FF')

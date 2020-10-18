@@ -2,12 +2,11 @@ import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
-const DemoInputTextArea = ({premature, onLog}) => {
+const DemoInputTextArea = () => {
   const [story, setStory]= useState('It started a warm Friday\'s night. I was bored...')
 
-  const [inputRef, valid, message, _setValidity] = useValiumInput({
-    type: 'textarea',
-    prematureValidation: premature
+  const [inputRef, valid, message] = useValiumInput({
+    type: 'textarea'
   })
 
   const handleStoryChange = (nStory) => {

@@ -2,9 +2,9 @@ import React from 'react'
 import {useValiumInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
-const DemoInputFile = ({onLog}) => {
+const DemoInputFile = () => {
 
-  const [inputRef, valid, message, _setValidity] = useValiumInput({
+  const [inputRef, valid, message] = useValiumInput({
     type: 'file'
   })
 

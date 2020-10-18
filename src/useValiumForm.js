@@ -2,10 +2,13 @@ import {useState, useRef, useEffect, useCallback} from 'react'
 import {log} from './helpers/log'
 
 
-const useValiumForm = () => {
+const useValiumForm = (props) => {
 
   const formRef = useRef(undefined)
   const [valid, setValid]= useState(true)
+
+  const {prematureValidation} = props || {}
+
 
   const readElements = useCallback(() => {
     if (formRef?.current==undefined) {
@@ -16,8 +19,6 @@ const useValiumForm = () => {
     if (! formElements) {
       return {}
     }
-
-    log('form', `readElements()` )
 
     let nElements= {}
     for (let idx = 0; idx < formElements.length; idx++) {
@@ -50,8 +51,6 @@ const useValiumForm = () => {
   
 
   useEffect(() => {
-    log('form', `Mount 1 -- ${formRef?.current==undefined ? 'waiting' : 'ready'}` )
-
     if (formRef?.current==undefined) {
       return
     }
@@ -62,16 +61,20 @@ const useValiumForm = () => {
       console.error(e)
     }
 
+    try {
+      formRef.current.setAttribute('valium-premature', prematureValidation)
+    } catch(e) {
+      console.error(e)
+    }    
+
     // Initial check of form validity
     const isValid= checkIsValid()
-    log('form', `Mount 1 -- setting valid to ${isValid}` )
+    log('form', `useEffect(1) Setting valid to ${isValid}` )
     setValid(isValid)
-  }, [checkIsValid])
+  }, [checkIsValid, prematureValidation])
 
 
   useEffect(() => {
-    log('form', `Mount 2 -- ${formRef?.current==undefined ? 'waiting' : 'ready'}` )
-
     if (formRef?.current==undefined) {
       return
     }
@@ -80,9 +83,9 @@ const useValiumForm = () => {
       const elName= event.detail.name
       //const elValid= event.detail.valid
       //const validity= event.detail.validity
-      //const value= event.detail.value
+      const value= event.detail.value
       const nValid= checkIsValid()
-      log('form', `on ${event.type} ${elName}. Valid? ${nValid} (curr ${valid})`)
+      log('form', `on ${event.type} ${elName}. Valid? ${nValid} (curr ${valid}) (value ${value})`)
 
       if (valid!=nValid) {
         setValid(nValid)
@@ -96,7 +99,7 @@ const useValiumForm = () => {
      formRef.current.removeEventListener('valium-form-change', formValidityListener)
     }    
 
-    log('form', `Mount 2 -- Listeners prepared` )
+    log('form', `useEffect(2) Listeners prepared` )
 
     return removeAllChangeListeners    
 

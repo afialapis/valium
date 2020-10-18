@@ -10,12 +10,11 @@ const getToday = (add= 0) => {
   return `${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate() + add)}`
 }
 
-const DemoInputDate = ({premature, onLog}) => {
+const DemoInputDate = () => {
 
-  const [inputRef, valid, message, _setValidity] = useValiumInput({
+  const [inputRef, valid, message] = useValiumInput({
     type: 'text',
-    disallowedValues: [getToday()],
-    prematureValidation: premature
+    disallowedValues: [getToday()]
   })
 
   const [when, setWhen]= useState(getToday(1))

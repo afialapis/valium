@@ -1,6 +1,6 @@
 {
   "name": "valium",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "description": "A Form validator for React, using and customizing HTML5 Constraint Validation API",
   "author": "Donato Lorenzo <donato@afialapis.com>",
   "contributors": [
@@ -17,13 +17,15 @@
   "homepage": "https://valium.afialapis.com/",
   "files": [
     "lib",
-    "dist"
+    "dist",
+    "demo"
   ],
   "main": "lib/index.js",
   "cjs": "dist/valium.cjs.js",
   "browser": "dist/valium.umd.js",
   "module": "dist/valium.es.js",
   "scripts": {
+    "clean-demo": "rm -rf demo/dist",
     "clean-test": "rm -f test/bundle.js",
     "clean-lib": "rm -rf lib && mkdir lib",
     "clean-dist": "rm -rf dist && mkdir dist",
@@ -31,8 +33,8 @@
     "test": "npm run clean-test && rollup -c rollup.test.js && karma start --singleRun",
     "lib": "npm run clean-lib && babel src -d lib",
     "dist": "npm run clean-dist && rollup -c",
-    "prepare": "npm run lint && npm run test && npm run lib && npm run dist",
-    "demo": "rm -rf demo/dist && mkdir demo/dist && rollup -c rollup.demo.js -w"
+    "prepare": "npm run clean-demo && npm run lint && npm run test && npm run clean-test && npm run lib && npm run dist",
+    "demo": "npm run clean-demo && mkdir demo/dist && rollup -c rollup.demo.js -w"
   },
   "keywords": [
     "js",

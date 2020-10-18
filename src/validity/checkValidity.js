@@ -1,4 +1,5 @@
-import {defaultMessages} from './messages'
+//import {log} from '../helpers/log'
+import {defaultMessages} from '../config/messages'
 import {parseForCompare} from '../helpers/compare'
 
 const countDecimals = (f) => {
@@ -13,20 +14,21 @@ const countDecimals = (f) => {
   }
 }
 
-const  checkValidity = (inputRef, value, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, decimals) => {
-  const input= inputRef.current
+const  checkValidity = (input, value, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, decimals) => {
   if (input==undefined) {
     return ''
   }
 
   // NOTE Manage 'disable' prop? sure?
-  if (inputRef.current.disabled===true) {
+  if (input.disabled===true) {
     return ''
   }
 
+  //log('input', `${input.name} (${input.type}) #${input.id} checkValidity() checking...`)
+
   const name= input.name
   const inputType= input.type.toLowerCase()
-
+  
   const vs= input.validity
   if (vs!=undefined) {
     if (vs.badInput       ) { return defaultMessages['badInput'] }
@@ -56,9 +58,12 @@ const  checkValidity = (inputRef, value, checkValue, allowedValues, disallowedVa
     }
   }
 
+  //log('input', `${input.name} (${input.type}) #${input.id} checkValidity() native validity is ok, doing custom checks...`)
+
   // When loading document, minlength/maxlength/step constraints are not checked
   // Check this pen: https://codepen.io/afialapis/pen/NWKJoPJ?editors=1111
   // and /issues/validity_on_load
+  
   if (input.maxLength && input.maxLength>0 && value.length>input.maxLength) {
     return defaultMessages['tooLong']
   }

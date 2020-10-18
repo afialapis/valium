@@ -14,11 +14,11 @@ const LISTM_OPTIONS= {
 }
 
 
-const DemoInputSelectMultiple = ({onLog}) => {
+const DemoInputSelectMultiple = () => {
 
   const [times, setTimes]= useState(['3', '5', '7'])
 
-  const [inputRef, valid, message, _setValidity] = useValiumInput({
+  const [inputRef, valid, message] = useValiumInput({
     type: 'select-multiple',
     disallowedValues: [['1', '3', '5', '7']]
   })
@@ -29,7 +29,6 @@ const DemoInputSelectMultiple = ({onLog}) => {
         .map((opt) => opt.value)
     
     setTimes(nTimes)
-    onLog(`Times for valium: ${JSON.stringify(nTimes)}`)
   }
 
   return (

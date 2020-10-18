@@ -1,3 +1,5 @@
+//import {log} from '../helpers/log'
+
 const getInputValue = (input) => {
 
   const inputType= input.type.toLowerCase()
@@ -24,9 +26,13 @@ const getInputValue = (input) => {
     }
   }
 
+  /*
+   // TO CHECK: When do we need this?
   if (input.value==undefined) {
     return ''
   }
+  */
+
   return input.value
 }
 

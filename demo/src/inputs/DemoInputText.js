@@ -2,37 +2,30 @@ import React, {useState} from 'react'
 import {useValiumInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
-const DemoInputText = ({premature, onLog}) => {
+const DemoInputText = () => {
   const [name, setName]= useState('John Not Doe')
   const [age, setAge]= useState('33') 
   const [words, _setWords]= useState('another dimension man!')
 
-  const [nameRef, nameValid, nameMessage, _setNameValidity] = useValiumInput({
+  const [nameRef, nameValid, nameMessage] = useValiumInput({
     type: 'text',
     disallowedValues: ["John Doe"],
-    prematureValidation: premature,
     inputFilter: 'latin'
   })
 
-  const [ageRef, ageValid, ageMessage, _setAgeValidity] = useValiumInput({
+  const [ageRef, ageValid, ageMessage] = useValiumInput({
     type: 'text',
     checkValue: (v) => !isNaN(v) && parseInt(v)>=18,
-    prematureValidation: premature,
     inputFilter: 'int'
   })
 
-  const [wordsRef, wordsValid, wordsMessage, _setWordsValidity] = useValiumInput({
-    type: 'text',
-    prematureValidation: premature
+  const [wordsRef, wordsValid, wordsMessage] = useValiumInput({
+    type: 'text'
   })
 
   const handleNameChange = (event) => {
     const nName= event.target.value
-    const focused= event.target.ownerDocument.activeElement === event.target
     setName(nName)
-    if (! focused) {
-      onLog(`Welcome ${nName}!`)
-    }
   }
 
   return (

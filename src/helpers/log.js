@@ -5,7 +5,7 @@ const log = (w, s) => {
     return
   }
   if (w=='form') {
-    console.log(`%cValium Formm: ${s}`, "color: orange");
+    console.log(`%cValium Form: ${s}`, "color: orange");
   } else {
     console.log(`Valium Input: ${s}`);
   }
