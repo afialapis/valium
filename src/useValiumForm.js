@@ -2,13 +2,10 @@ import {useState, useRef, useEffect, useCallback} from 'react'
 import {log} from './helpers/log'
 
 
-const useValiumForm = (props) => {
+const useValiumForm = () => {
 
   const formRef = useRef(undefined)
   const [valid, setValid]= useState(true)
-
-  const {prematureValidation} = props || {}
-
 
   const readElements = useCallback(() => {
     if (formRef?.current==undefined) {
@@ -61,17 +58,11 @@ const useValiumForm = (props) => {
       console.error(e)
     }
 
-    try {
-      formRef.current.setAttribute('valium-premature', prematureValidation)
-    } catch(e) {
-      console.error(e)
-    }    
-
     // Initial check of form validity
     const isValid= checkIsValid()
     log('form', `useEffect(1) Setting valid to ${isValid}` )
     setValid(isValid)
-  }, [checkIsValid, prematureValidation])
+  }, [checkIsValid])
 
 
   useEffect(() => {

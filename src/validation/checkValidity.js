@@ -1,5 +1,4 @@
 //import {log} from '../helpers/log'
-import {defaultMessages} from '../config/messages'
 import {parseForCompare} from '../helpers/compare'
 
 const countDecimals = (f) => {
@@ -31,30 +30,30 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
   
   const vs= input.validity
   if (vs!=undefined) {
-    if (vs.badInput       ) { return defaultMessages['badInput'] }
-    if (vs.patternMismatch) { return defaultMessages['patternMismatch'] }
-    if (vs.rangeOverflow  ) { return defaultMessages['rangeOverflow'] }
-    if (vs.rangeUnderflow ) { return defaultMessages['rangeUnderflow'] }
-    if (vs.tooLong        ) { return defaultMessages['tooLong'] }
-    if (vs.tooShort       ) { return defaultMessages['tooShort'] }
-    if (vs.typeMismatch   ) { return defaultMessages['typeMismatch'] }
-    if (vs.valueMissing   ) { return defaultMessages['valueMissing'] }
+    if (vs.badInput       ) { return 'badInput' }
+    if (vs.patternMismatch) { return 'patternMismatch' }
+    if (vs.rangeOverflow  ) { return 'rangeOverflow' }
+    if (vs.rangeUnderflow ) { return 'rangeUnderflow' }
+    if (vs.tooLong        ) { return 'tooLong' }
+    if (vs.tooShort       ) { return 'tooShort' }
+    if (vs.typeMismatch   ) { return 'typeMismatch' }
+    if (vs.valueMissing   ) { return 'valueMissing' }
 
     if (decimals!=undefined && ! isNaN(decimals)) {
       //
       // For custom steppable inputs
       //
       if (decimals<countDecimals(value)) {
-        return defaultMessages['stepMismatch']
+        return 'stepMismatch'
       }
     } /*else if (input.step != undefined) {
       //
       // for non steppable inputs
       //
-      if (vs.valid===false  ) { return defaultMessages['valid'] }
+      if (vs.valid===false  ) { return 'valid' }
     }*/
     else {
-      if (vs.stepMismatch   ) { return defaultMessages['stepMismatch'] }
+      if (vs.stepMismatch   ) { return 'stepMismatch' }
     }
   }
 
@@ -65,16 +64,16 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
   // and /issues/validity_on_load
   
   if (input.maxLength && input.maxLength>0 && value.length>input.maxLength) {
-    return defaultMessages['tooLong']
+    return 'tooLong'
   }
   if (input.minLength && input.minLength>0 && value.length<input.minLength) {
-    return defaultMessages['tooShort']
+    return 'tooShort'
   }
   
   /*if (input.step!=undefined && input.step!=='' && input.step!=='any') {
     if (decimals==undefined || isNaN(decimals)) {
       if (countDecimals(input.step)!=countDecimals(value)) {
-        return defaultMessages['stepMismatch']
+        return 'stepMismatch'
       }
     }
   }*/
@@ -82,7 +81,7 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
   // Some inputs like hidden and select, wont perform 
   // the standard required validation
   if (input.required && (value=='' || value==undefined)) {
-    return defaultMessages['valueMissing'];
+    return 'valueMissing'
   }  
 
   // Custom validate function
@@ -91,12 +90,12 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
     if (result == Promise.resolve(result)) {
       result.then((r) => {
         if (! r) {
-          return defaultMessages['customError']
+          return 'customError'
         }
       })
     } else {
       if (! result) {
-        return defaultMessages['customError']
+        return 'customError'
       }
     }
   }
@@ -107,7 +106,7 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
       .map((v) => parseForCompare(inputType, v))
       .indexOf(parseForCompare(inputType, value)) >= 0
     if (! exists) {
-      return defaultMessages['customAllowList']
+      return 'customAllowList'
     }
   }
 
@@ -117,7 +116,7 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
       .map((v) => parseForCompare(inputType, v))
       .indexOf(parseForCompare(inputType, value)) >= 0
     if (exists) {
-      return defaultMessages['customDisallowList']
+      return 'customDisallowList'
     }
   }
 
@@ -126,7 +125,7 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
     const otherInput= input.form.elements[doRepeat]
     if (otherInput!=undefined) {
       if(otherInput.value != value) {
-        return defaultMessages['customDoRepeat']
+        return 'customDoRepeat'
       }
     } else {
       if (process.env.NODE_ENV !== "production") {
@@ -140,7 +139,7 @@ const  checkValidity = (input, value, checkValue, allowedValues, disallowedValue
     const otherInput= input.form.elements[doNotRepeat]
     if (otherInput!=undefined) {
       if(otherInput.value == value) {
-        return defaultMessages['customDoNotRepeat']
+        return 'customDoNotRepeat'
       }
     } else {
       if (process.env.NODE_ENV !== "production") {

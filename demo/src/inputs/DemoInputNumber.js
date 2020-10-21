@@ -10,7 +10,8 @@ const DemoInputNumber = () => {
 
   const [pillsRef, pillsValid, pillsMessage] = useValiumInput({
     decimals: 1,
-    checkValue: (v) => v>=6
+    checkValue: (v) => v>=6,
+    feedback: 'Hey folk, give yourself a bit of fun!'
   })
 
   const [weightRef, weightValid, weightMessage] = useValiumInput({

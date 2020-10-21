@@ -4,8 +4,8 @@ import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputText = () => {
   const [name, setName]= useState('John Not Doe')
-  const [age, setAge]= useState('33') 
-  const [words, _setWords]= useState('another dimension man!')
+  const [age, _setAge]= useState('33') 
+  const [words, setWords]= useState('another dimension man!')
 
   const [nameRef, nameValid, nameMessage] = useValiumInput({
     type: 'text',
@@ -44,25 +44,26 @@ const DemoInputText = () => {
 
       <DemoInputGroup 
         label       = {"Your age here"}
-        description = {"Controlled. Required. Some >18 integer (through inputFilter)"}
+        description = {"Uncontrolled. Required. Some >18 integer (through inputFilter)"}
         message     = {ageMessage}>
         <input ref       = {ageRef}
                name      = {'age'}
                className = {ageValid ? 'valid' : 'invalid'}
                required  = {true}
-               value     = {age}
-               onChange  = {(ev) => setAge(ev.target.value)}/>
+               defaultValue = {age}
+               /*onChange  = {(ev) => setAge(ev.target.value)}*//>
       </DemoInputGroup>
 
       <DemoInputGroup
         label       = {"Your experience with Valium in two words"}
-        description = {`Uncontrolled. Not required. Max length 20 (currently ${words.length})`}
+        description = {`Controlled. Not required. Max length 20 (currently ${words ? words.length : 0})`}
         message     = {wordsMessage}>
         <input ref          = {wordsRef}
                name         = {'why'}
                className    = {wordsValid ? 'valid' : 'invalid'}
                maxLength    = {20}
-               defaultValue = {words}/>
+               value        = {words}
+               onChange     = {(ev) => setWords(ev.target.value)}/>
       </DemoInputGroup>
 
     </>

@@ -38,7 +38,7 @@ const baseCfg= (output, withReplace, withTerser) => {
   return {
     input: input,
     output: output,
-    external: ['react', 'prop-types'],
+    external: ['react'],
     plugins: plugins  
   }
 }
@@ -76,8 +76,7 @@ module.exports = [
     format: 'umd',
     name: 'Valium',
     globals: {
-      'react': 'React',
-      'prop-types': 'PropTypes'
+      'react': 'React'
     }
   }, true, false),
   baseCfg({
@@ -85,8 +84,7 @@ module.exports = [
     format: 'umd',
     name: 'Valium',
     globals: {
-      'react': 'React',
-      'prop-types': 'PropTypes'
+      'react': 'React'
     }
   }, true, true), 
   

@@ -1,4 +1,4 @@
-const defaultMessages = {
+const DEFAULT_MESSAGES = {
   badInput        : 'Value is wrong',
   customError     : 'Value does not match custom validity',
   patternMismatch : 'Value does not match expected pattern',
@@ -17,4 +17,7 @@ const defaultMessages = {
   customDoNotRepeat  : 'Value cannot be repeated'
 }
 
-export {defaultMessages}
+const getDefaultMessage = (n) =>
+  DEFAULT_MESSAGES[n]
+
+export {getDefaultMessage}

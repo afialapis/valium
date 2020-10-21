@@ -27,12 +27,9 @@ const INPUT_TYPES= [
 
 
 const Demo = () => {
-  const [premature, _]= useState(true)
   const [resume, setResume]= useState([{msg: "Save form to see a resume here!"}])
 
-  const [formRef, valid, readElements] = useValiumForm({prematureValidation: premature})
-
-
+  const [formRef, valid, readElements] = useValiumForm()
 
   const handleSubmit = (valid, felements) => {
     const nResume= []
@@ -64,15 +61,11 @@ const Demo = () => {
 
   return (  
 
-      <Base logoSrc = "assets/img/valium.png"
-            menuTitle   = "Input Types"
-            menuItems   = {getMenuItems()}
-            options = {[{
-              name: 'premature',
-              value: premature,
-              label: 'Premature Validation'
-            }]}
-            resume  = {resume}>
+      <Base logoSrc   = "assets/img/valium.png"
+            menuTitle = "Input Types"
+            menuItems = {getMenuItems()}
+            options   = {[]}
+            resume    = {resume}>
 
           <form ref = {formRef}>
              

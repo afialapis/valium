@@ -18,13 +18,7 @@ const DemoInputSelect = () => {
     disallowedValues: ['3', '4']
   })
   
-  const handleExperienceChange = (nExperience) => {
-    console.log(`Valium Demo: select-one switched to ${nExperience}`)
-    setExperience(nExperience)
-  }
-
   return (
-
     <DemoInputGroup 
       label       = {"What do you think about Valium?"}
       description = ""
@@ -35,7 +29,7 @@ const DemoInputSelect = () => {
               className    = {valid ? 'valid' : 'invalid'}
               required     = {true}
               value        = {experience}
-              onChange     = {(ev) => handleExperienceChange(ev.target.value)}>
+              onChange     = {(ev) => setExperience(ev.target.value)}>
         {LIST_OPTIONS.map(([k,v]) => 
           <option key={`single-select-option-${k}`}
                   value={k}>

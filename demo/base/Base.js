@@ -9,7 +9,7 @@ import '../assets/scss/index.scss'
 const Base = ({logoSrc, menuTitle, menuItems, options, resume, children}) => {
 
   return (  
-    <div className="container">
+    <div className="valium-container">
 
       <BaseHeader logoSrc={logoSrc}/>
 

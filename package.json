@@ -1,6 +1,6 @@
 {
   "name": "valium",
-  "version": "0.0.43",
+  "version": "0.0.44",
   "description": "A Form validator for React, using and customizing HTML5 Constraint Validation API",
   "author": "Donato Lorenzo <donato@afialapis.com>",
   "contributors": [
@@ -74,11 +74,9 @@
     "rollup-plugin-terser": "^6.1.0"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
     "react": "^16.13.1"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "prop-types": ">=15.7.2"
+    "react": ">=16.13.1"
   }
 }

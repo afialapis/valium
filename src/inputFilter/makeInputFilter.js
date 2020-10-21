@@ -23,7 +23,7 @@ const _fltBase = (regex) => {
 }
 
 
-const makeInputFilter = (name, inputFilter) => {
+const makeInputFilter = (inputFilter, inputName) => {
 
   if (inputFilter == undefined || inputFilter === '') {
     return undefined
@@ -32,7 +32,7 @@ const makeInputFilter = (name, inputFilter) => {
   if (typeof inputFilter === 'string') {
     const regex= VALIUM_INPUT_FILTERS[inputFilter]
     if (regex===undefined) {
-      console.error(`Valium: error on Input Element (${name}). (${inputFilter}) is not a valid inputFilter`)
+      console.error(`Valium: error on Input Element (${inputName}). (${inputFilter}) is not a valid inputFilter`)
       return undefined
     }
     return _fltBase(regex)
@@ -46,7 +46,7 @@ const makeInputFilter = (name, inputFilter) => {
     return inputFilter
   }
 
-  console.error(`Valium: error on Input Element (${name}). (${inputFilter}) of type (${typeof inputFilter}) is not a valid inputFilter`)
+  console.error(`Valium: error on Input Element (${inputName}). (${inputFilter}) of type (${typeof inputFilter}) is not a valid inputFilter`)
   return undefined
 
 }
