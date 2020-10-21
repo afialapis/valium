@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useValiumForm} from '../../src'
+import {useForm} from '../../src'
 
 import {Base} from '../base/Base'
 
@@ -29,7 +29,7 @@ const INPUT_TYPES= [
 const Demo = () => {
   const [resume, setResume]= useState([{msg: "Save form to see a resume here!"}])
 
-  const [formRef, valid, readElements] = useValiumForm()
+  const [formRef, valid, readElements] = useForm()
 
   const handleSubmit = (valid, felements) => {
     const nResume= []

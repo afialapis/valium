@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useValiumInput} from '../../../src'
+import {useInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputNumber = () => {
@@ -8,17 +8,17 @@ const DemoInputNumber = () => {
   const [weight, setWeight]= useState(105.876)
   const [size, setSize]= useState(1.44)
 
-  const [pillsRef, pillsValid, pillsMessage] = useValiumInput({
+  const [pillsRef, pillsValid, pillsMessage] = useInput({
     decimals: 1,
     checkValue: (v) => v>=6,
     feedback: 'Hey folk, give yourself a bit of fun!'
   })
 
-  const [weightRef, weightValid, weightMessage] = useValiumInput({
+  const [weightRef, weightValid, weightMessage] = useInput({
     decimals: 3
   })
   
-  const [sizeRef, sizeValid, sizeMessage] = useValiumInput({})  
+  const [sizeRef, sizeValid, sizeMessage] = useInput({})  
 
 
   const handlePillsChange = (nPills) => {

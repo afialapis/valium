@@ -1,10 +1,10 @@
 import React from 'react'
-import {useValiumInput} from '../../../src'
+import {useInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputFile = () => {
 
-  const [inputRef, valid, message] = useValiumInput({
+  const [inputRef, valid, message] = useInput({
     type: 'file'
   })
 

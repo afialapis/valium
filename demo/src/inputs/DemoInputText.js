@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useValiumInput} from '../../../src'
+import {useInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputText = () => {
@@ -7,19 +7,19 @@ const DemoInputText = () => {
   const [age, _setAge]= useState('33') 
   const [words, setWords]= useState('another dimension man!')
 
-  const [nameRef, nameValid, nameMessage] = useValiumInput({
+  const [nameRef, nameValid, nameMessage] = useInput({
     type: 'text',
     disallowedValues: ["John Doe"],
     inputFilter: 'latin'
   })
 
-  const [ageRef, ageValid, ageMessage] = useValiumInput({
+  const [ageRef, ageValid, ageMessage] = useInput({
     type: 'text',
     checkValue: (v) => !isNaN(v) && parseInt(v)>=18,
     inputFilter: 'int'
   })
 
-  const [wordsRef, wordsValid, wordsMessage] = useValiumInput({
+  const [wordsRef, wordsValid, wordsMessage] = useInput({
     type: 'text'
   })
 

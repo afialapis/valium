@@ -7,7 +7,7 @@ import {useInputFilter} from './inputFilter/useInputFilter'
 import {useValidationListener} from './validation/useValidationListener'
 import {useValidationHandler} from './validation/useValidationHandler'
 
-const useValiumInput = (props) => {
+const useInput = (props) => {
 
   const {checkValue, 
         allowedValues, disallowedValues, 
@@ -57,11 +57,11 @@ const useValiumInput = (props) => {
 
 
 
-  log('input', `Render, ${inputRef?.current?.name} (${inputRef?.current?.type}) #${inputRef?.current?.id} useValiumInput (value ${inputRef?.current?.value})`)
+  log('input', `Render, ${inputRef?.current?.name} (${inputRef?.current?.type}) #${inputRef?.current?.id} useInput (value ${inputRef?.current?.value})`)
   
   return [inputRef, validity==='', validity, setValidity]
 }
 
 
 
-export {useValiumInput}
+export {useInput}

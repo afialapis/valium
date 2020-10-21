@@ -2,7 +2,7 @@ import {useState, useRef, useEffect, useCallback} from 'react'
 import {log} from './helpers/log'
 
 
-const useValiumForm = () => {
+const useForm = () => {
 
   const formRef = useRef(undefined)
   const [valid, setValid]= useState(true)
@@ -102,5 +102,5 @@ const useValiumForm = () => {
   return [formRef, valid, readElements]
 }
 
-export {useValiumForm}
+export {useForm}
 

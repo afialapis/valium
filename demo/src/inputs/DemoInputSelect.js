@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useValiumInput} from '../../../src'
+import {useInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
 const LIST_OPTIONS= [
@@ -13,7 +13,7 @@ const LIST_OPTIONS= [
 const DemoInputSelect = () => {
   const [experience, setExperience]= useState(undefined /*'1'*/)
 
-  const [inputRef, valid, message] = useValiumInput({
+  const [inputRef, valid, message] = useInput({
     type: 'select',
     disallowedValues: ['3', '4']
   })

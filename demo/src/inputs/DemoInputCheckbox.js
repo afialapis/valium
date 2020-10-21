@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import {useValiumInput} from '../../../src'
+import {useInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
 const DemoInputCheckbox = () => {
 
-  const [inputRef, valid, message] = useValiumInput({
+  const [inputRef, valid, message] = useInput({
     type: 'checkbox',
     disallowedValues: [true]
   })

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useValiumInput} from '../../../src'
+import {useInput} from '../../../src'
 import {DemoInputGroup} from './DemoInputGroup'
 
 const LISTM_OPTIONS= {
@@ -18,7 +18,7 @@ const DemoInputSelectMultiple = () => {
 
   const [times, setTimes]= useState(['3', '5', '7'])
 
-  const [inputRef, valid, message] = useValiumInput({
+  const [inputRef, valid, message] = useInput({
     type: 'select-multiple',
     disallowedValues: [['1', '3', '5', '7']]
   })
