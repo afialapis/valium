@@ -6,7 +6,7 @@ import {log} from '../helpers/log'
 // This event list would cover every need:
 // ['input', 'keydown', 'keyup', 'mousedown', 'mouseup', 'select', 'contextmenu', 'drop'],
 // But lets start simple and easy. 
-const INPUT_FILTER_EVENT_TYPES= ['input']
+const INPUT_FILTER_EVENT_TYPES= ['input', 'keydown', 'mousedown']
 
 const useInputFilter = (inputRef, inputFilter ) => {
 
