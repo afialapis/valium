@@ -1,5 +1,5 @@
 const EVENT_TYPES= {
-  'checkbox'        : ['click'],                    // {change: 'click' , premature: []},
+  'checkbox'        : ['change'],                    // {change: 'click' , premature: []},
   'color'           : ['change', 'click'],          // {change: 'change', premature: ['click']},
   'date'            : ['change', 'keyup', 'paste'], // {change: 'change', premature: ['keyup', 'paste']},
   'datetime-local'  : ['change', 'keyup', 'paste'], // {change: 'change', premature: ['keyup', 'paste']},
