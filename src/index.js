@@ -1,4 +1,4 @@
 import {useForm } from './useForm'
 import {useInput} from './useInput'
-
-export {useForm, useInput}
+import {useInputFilter} from'./inputFilter/useInputFilter'
+export {useForm, useInput, useInputFilter}

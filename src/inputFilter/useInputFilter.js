@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import {makeInputFilter} from './makeInputFilter'
-import {log} from '../helpers/log'
 
 
 // This event list would cover every need:
@@ -62,16 +61,11 @@ const useInputFilter = (inputRef, inputFilter ) => {
     // clean listeners function
     const removeAllChangeListeners = () => {
       if (input!=undefined) {
-        log('input', `${input.name} (${input.type}) #${input.id} useInputFilter() dettaching`)
         Object.keys(allListeners).map((eventType) => {
           input.removeEventListener(eventType, allListeners[eventType])
         })
-      } else {
-        log('input', `${input.name} (${input.type}) #${input.id} useInputFilter() WARNING! Could not dettach`)
       }
     }   
-    
-    log('input', `${input.name} (${input.type}) #${input.id} useInputFilter() attached`)
       
     // return clean function
     return removeAllChangeListeners
