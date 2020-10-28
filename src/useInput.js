@@ -9,7 +9,7 @@ import {useValidationHandler} from './validation/useValidationHandler'
 
 const useInput = (props) => {
 
-  const {checkValue, 
+  const {transformValue, checkValue, 
         allowedValues, disallowedValues, 
         doRepeat, doNotRepeat, decimals, 
         inputFilter, feedback}= props
@@ -34,7 +34,7 @@ const useInput = (props) => {
   // 
   // Get validation handler and current validity
   //
-  const [validity, handler]= useValidationHandler(checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, decimals, feedback)
+  const [validity, handler]= useValidationHandler(transformValue, checkValue, allowedValues, disallowedValues, doRepeat, doNotRepeat, decimals, feedback)
 
   //
   // Attaches validation listeners
