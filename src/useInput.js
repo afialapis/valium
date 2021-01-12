@@ -53,7 +53,7 @@ const useInput = (props) => {
   //
   useEffect(() => {
     setValidity()
-  }, [setValidity])
+  }, [setValidity, inputRef?.current?.value])
 
 
 
