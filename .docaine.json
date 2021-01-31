@@ -1,0 +1,15 @@
+{
+  "company": {
+    "name": "afialapis.com",
+    "url": "http://www.afialapis.com"
+  },  
+  "dev": {
+    "port": 8100
+  },
+  "demo": true,
+  "logo": "logo/valium.png",
+  "docs": {
+    "versions": ["0.0.50", "0.0.53"],
+    "defaultVersion": "0.0.53"
+  }
+}
