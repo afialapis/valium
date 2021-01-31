@@ -13,8 +13,8 @@ module.exports = {
   pkg: {
     name: 'valium',
     repo: 'https://github.com/afialapis/valium',
-    versions: ['0.0.50', '0.0.51'],
-    defaultVersion: '0.0.51',
+    versions: ['0.0.50', '0.0.52'],
+    defaultVersion: '0.0.52',
     license: 'MIT'
   }
 }
