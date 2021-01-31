@@ -2,16 +2,16 @@ import babel from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 import resolve from '@rollup/plugin-node-resolve'
+import scss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
 
 import packageJSON from './package.json'
 
 const NODE_ENV = 'production'
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
-const input = './src/index.js';
 
 
-const baseCfg= (output, withReplace, withTerser) => {
+const getPlugins= (withReplace, withTerser, withScss) => {
   let plugins= []
   if (withReplace) {
     plugins.push(
@@ -34,36 +34,63 @@ const baseCfg= (output, withReplace, withTerser) => {
       terser()
     )
   }
-
-  return {
-    input: input,
-    output: output,
-    external: ['react'],
-    plugins: plugins  
+  if (withScss) {
+    plugins.push(
+      scss()
+    )
   }
+
+  return plugins
 }
+
+const forDist= (output, withReplace, withTerser) => {
+  return {
+    input   : './src/index.js',
+    output  : output,
+    external: ['react'],
+    plugins : getPlugins(withReplace, withTerser, false)  
+  }  
+}
+
+const forDocaine= () => {
+  return {
+    input   : 'demo/index.js',
+    output  : {
+      file: minifyExtension(packageJSON.docaine),
+      format: 'umd',
+      name: 'Valium',
+      globals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM'
+      }
+    },
+    external: ['react', 'react-demo'],
+    plugins : getPlugins(true, false, true)  
+  }  
+}
+
 
 module.exports = [
   //
   // CommonJs
   //
-  baseCfg({
+  forDist({
     file: packageJSON.cjs,
     format: 'cjs'
   }, false, false),
-  baseCfg({
+  forDist({
     file: minifyExtension(packageJSON.cjs),
     format: 'cjs'
   }, false, true),
   //
   // ES modules
   //
-  baseCfg({
+  forDist({
     file: packageJSON.module,
     format: 'es',
     exports: 'named'
   }, true, false),
-  baseCfg({
+  forDist({
     file: minifyExtension(packageJSON.module),
     format: 'es',
     exports: 'named'
@@ -71,7 +98,7 @@ module.exports = [
   //
   // UMD
   //  
-  baseCfg({
+  forDist({
     file: packageJSON.browser,
     format: 'umd',
     name: 'Valium',
@@ -79,7 +106,7 @@ module.exports = [
       'react': 'React'
     }
   }, true, false),
-  baseCfg({
+  forDist({
     file: minifyExtension(packageJSON.browser),
     format: 'umd',
     name: 'Valium',
@@ -87,5 +114,8 @@ module.exports = [
       'react': 'React'
     }
   }, true, true), 
-  
+  //
+  // Docaine
+  //  
+  forDocaine()  
 ];
