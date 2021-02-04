@@ -1,4 +1,5 @@
 {
+  "url": "http://docaine.afialapis.com",
   "company": {
     "name": "afialapis.com",
     "url": "http://www.afialapis.com"
@@ -9,7 +10,7 @@
   "demo": true,
   "logo": "valium.png",
   "docs": {
-    "versions": ["0.0.50", "0.0.54"],
-    "defaultVersion": "0.0.54"
+    "versions": ["0.0.50", "0.0.54", "0.0.55"],
+    "defaultVersion": "0.0.55"
   }
 }
