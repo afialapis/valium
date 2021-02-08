@@ -6,6 +6,7 @@ import scss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
 
 import packageJSON from './package.json'
+import docaineJSON from './docaine.json'
 
 const NODE_ENV = 'production'
 const minifyExtension = pathToFile => pathToFile.replace(/\.js$/, '.min.js');
@@ -56,7 +57,7 @@ const forDocaine= () => {
   return {
     input   : 'demo/index.js',
     output  : {
-      file: minifyExtension(packageJSON.docaine),
+      file: minifyExtension(docaineJSON.demo),
       format: 'umd',
       name: 'Valium',
       globals: {

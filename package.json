@@ -1,6 +1,6 @@
 {
   "name": "valium",
-  "version": "0.0.54",
+  "version": "0.0.56",
   "description": "A Form validator for React, using and customizing HTML5 Constraint Validation API",
   "author": "Donato Lorenzo <donato@afialapis.com>",
   "contributors": [
@@ -18,13 +18,12 @@
   "files": [
     "lib",
     "dist",
-    ".docaine.json",
+    "docaine.json",
     "valium.png"
   ],
   "main": "lib/index.js",
   "cjs": "dist/valium.cjs.js",
   "browser": "dist/valium.umd.js",
-  "docaine": "dist/valium.docaine.js",
   "module": "dist/valium.es.js",
   "scripts": {
     "clean-demo": "rm -rf demo/dist",

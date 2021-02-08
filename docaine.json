@@ -1,5 +1,4 @@
 {
-  "url": "http://docaine.afialapis.com",
   "company": {
     "name": "afialapis.com",
     "url": "http://www.afialapis.com"
@@ -7,10 +6,10 @@
   "dev": {
     "port": 8100
   },
-  "demo": true,
+  "demo": "dist/valium.docaine.js",
   "logo": "valium.png",
   "docs": {
-    "versions": ["0.0.50", "0.0.54", "0.0.55"],
-    "defaultVersion": "0.0.55"
+    "versions": ["0.0.50", "0.0.54", "0.0.55", "0.0.56"],
+    "defaultVersion": "0.0.56"
   }
 }
