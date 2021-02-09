@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {useForm} from '../../src'
 
+import {Base} from '../base/Base'
+
 import {DemoInputCheckbox} from './inputs/DemoInputCheckbox'
 import {DemoInputColor} from './inputs/DemoInputColor'
 import {DemoInputDate} from './inputs/DemoInputDate'
@@ -44,44 +46,46 @@ const Demo = () => {
     setResume(nResume)
   }
 
+  const getMenuItems= () => {
+    let items= []
+    INPUT_TYPES.map((inputType) => {
+      let item= {
+        key: inputType.type,
+        label: inputType.type,
+      }
+
+      items.push(item)
+    })
+    return items
+  }
 
   return (  
 
-    <div className="valium-container">
+      <Base logoSrc   = "assets/img/valium.png"
+            menuTitle = "Input Types"
+            menuItems = {getMenuItems()}
+            options   = {[]}
+            resume    = {resume}>
 
-      <form ref = {formRef}>
-          
-        {INPUT_TYPES.map((inputType) => 
-            <section key={`section_${inputType.type}`}
-                  id={inputType.type}>
-              <h1>{inputType.type}</h1>
-                <inputType.comp/>
-            </section>
-          )
-        }
-
-        <section className="centered">
-          <a className="btn btn-primary"
-                  onClick={(_ev) => handleSubmit(valid, readElements)}>
-                    {valid ? 'Submit' : 'Invalid yet'}
-                  </a>
-        </section>                 
-      </form>
-
-      <div className="valium-resume">
-        <h2>Resume</h2>
-
-        <div className="log">
-          {resume.length>0
-           ? resume.map((s, i) => 
-              <div key={`log_line_${i}`}
-                  className="log_line" style={{...s.style || {}}}>{s.msg}</div>
+          <form ref = {formRef}>
+             
+            {INPUT_TYPES.map((inputType) => 
+                <section key={`section_${inputType.type}`}
+                      id={inputType.type}>
+                  <h2>{inputType.type}</h2>
+                    <inputType.comp/>
+                </section>
               )
-            : null
-           }
-        </div>
-      </div>
-    </div>
+            }
+
+            <section className="centered">
+              <a className="btn btn-primary"
+                      onClick={(_ev) => handleSubmit(valid, readElements)}>
+                        {valid ? 'Submit' : 'Invalid yet'}
+                      </a>
+            </section>                 
+          </form>
+      </Base>
 
   )
 }

@@ -2,14 +2,14 @@
   "company": {
     "name": "afialapis.com",
     "url": "http://www.afialapis.com"
-  },  
+  },    
   "dev": {
     "port": 8100
   },
   "demo": "dist/valium.docaine.min.js",
   "logo": "valium.png",
   "docs": {
-    "versions": ["0.0.50", "0.0.57"],
-    "defaultVersion": "0.0.57"
+    "versions": ["0.0.50", "0.0.58"],
+    "defaultVersion": "0.0.58"
   }
 }

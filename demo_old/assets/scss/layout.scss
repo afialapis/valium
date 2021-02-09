@@ -1,0 +1,131 @@
+/**
+ * grid
+ */
+.valium-container {
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-template-areas: 
+    "header header header"
+    "nav content sidebar"
+    "footer  footer  footer";
+}
+
+header {
+  grid-area: header;
+}
+
+nav {
+  grid-area: nav;
+}
+
+aside {
+  grid-area: sidebar;
+}
+
+main {
+  grid-area: content;
+}
+
+footer {
+  grid-area: footer;
+}
+
+
+/**
+ * main styling
+ */
+
+
+body {
+  header {
+    img.logo {
+      width: 100px;
+      margin-right: 1em;
+    }
+  }
+
+  nav {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    li {
+      border-bottom: 1px solid #ccc;
+      padding-top: 1em;
+    }
+    
+    li:last-child {
+      border: none;
+    }
+    
+    li a {
+      color:inherit;
+      text-decoration: none;
+      display: block;
+    
+      -webkit-transition: font-size 0.3s ease;
+      -moz-transition: font-size 0.3s ease;
+      -o-transition: font-size 0.3s ease;
+      -ms-transition: font-size 0.3s ease;
+      transition: font-size 0.3s ease;
+    }
+    
+    li a:hover,
+    li.active a {
+      font-size: 20px;
+      cursor: pointer;
+    }  
+  }
+
+  aside {
+    .log {
+      color: gray;
+      font-size: 9pt;
+    }
+  }
+
+  main {
+    .valium-example {
+      border-radius: 5px;
+      padding: 1em;
+
+      section {
+        margin-top: 2em;
+      }
+    }
+  }
+
+}
+
+
+
+
+.centered {
+  text-align: center;
+}
+
+.mgbottom {
+  margin-bottom: 2em;
+}
+
+.mgleft {
+  margin-left: 2em;
+}
+
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+  margin: 0 2em;
+  background-color: #ece8e8;
+  padding: 1em;
+}
+
+
+
