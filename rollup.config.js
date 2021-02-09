@@ -57,7 +57,7 @@ const forDocaine= () => {
   return {
     input   : 'demo/index.js',
     output  : {
-      file: minifyExtension(docaineJSON.demo),
+      file: docaineJSON.demo,
       format: 'umd',
       name: 'Valium',
       globals: {
