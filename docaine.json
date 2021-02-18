@@ -10,11 +10,11 @@
   "logo": "logo/valium.png",
   "favicon": {
     "ico": "logo/favicon/valium.ico",
-    "png": "logo/favicon/valium.pgn",
-    "apple": "logo/favicon/valium_apple.ico"
+    "png": "logo/favicon/valium.png",
+    "apple": "logo/favicon/valium_apple.png"
   },
   "docs": {
-    "versions": ["0.0.50", "0.0.59"],
-    "defaultVersion": "0.0.59"
+    "versions": ["0.0.50", "0.0.60"],
+    "defaultVersion": "0.0.60"
   }
 }
