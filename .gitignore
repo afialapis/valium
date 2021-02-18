@@ -36,7 +36,6 @@ npm-debug.log*
 *.sublime-project
 package-lock.json
 .vscode
-logo
 issues
 codepen
 .npmignore

@@ -7,9 +7,14 @@
     "port": 8100
   },
   "demo": "dist/valium.docaine.min.js",
-  "logo": "valium.png",
+  "logo": "logo/valium.png",
+  "favicon": {
+    "ico": "logo/favicon/valium.ico",
+    "png": "logo/favicon/valium.pgn",
+    "apple": "logo/favicon/valium_apple.ico"
+  },
   "docs": {
-    "versions": ["0.0.50", "0.0.58"],
-    "defaultVersion": "0.0.58"
+    "versions": ["0.0.50", "0.0.59"],
+    "defaultVersion": "0.0.59"
   }
 }
