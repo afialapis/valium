@@ -48,13 +48,13 @@ const Demo = () => {
   return (  
 
     <div className="valium-container">
-
+      <h1>Input Types</h1>
       <form ref = {formRef}>
           
         {INPUT_TYPES.map((inputType) => 
             <section key={`section_${inputType.type}`}
                   id={inputType.type}>
-              <h1>{inputType.type}</h1>
+              <h2>{inputType.type}</h2>
                 <inputType.comp/>
             </section>
           )
@@ -69,7 +69,7 @@ const Demo = () => {
       </form>
 
       <div className="valium-resume">
-        <h2>Resume</h2>
+        <h1>Resume</h1>
 
         <div className="log">
           {resume.length>0

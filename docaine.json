@@ -14,7 +14,7 @@
     "apple": "logo/favicon/valium_apple.png"
   },
   "docs": {
-    "versions": ["0.0.50", "0.0.60", "0.0.61"],
-    "defaultVersion": "0.0.61"
+    "versions": ["0.0.50", "0.0.60", "0.0.61", "0.0.62"],
+    "defaultVersion": "0.0.62"
   }
 }
